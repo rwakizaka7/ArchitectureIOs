@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+    <device id="retina6_1" orientation="portrait" appearance="dark"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Test Menu View Controller-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="NavigationTestMenuViewController" id="Y6W-OH-hqX" customClass="NavigationTestMenuViewController" customModule="CalendarIOs" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" contentInsetAdjustmentBehavior="always" delaysContentTouches="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="fXF-mH-QYF">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="hy4-bN-QId">
+                                    <size key="itemSize" width="144" height="100"/>
+                                    <size key="headerReferenceSize" width="50" height="50"/>
+                                    <size key="footerReferenceSize" width="50" height="50"/>
+                                    <inset key="sectionInset" minX="16" minY="0.0" maxX="16" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="NavigationTestMenuVCMenuCollectionViewCell" id="vKT-MI-y8u" customClass="NavigationTestMenuVCMenuCollectionViewCell" customModule="CalendarIOs" customModuleProvider="target">
+                                        <rect key="frame" x="16" y="50" width="144" height="100"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="hJS-4y-W6H">
+                                            <rect key="frame" x="0.0" y="0.0" width="144" height="100"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G7b-Ls-1Kx">
+                                                    <rect key="frame" x="3" y="3" width="138" height="94"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PqF-xf-LT7">
+                                                            <rect key="frame" x="8" y="8" width="122" height="78"/>
+                                                            <attributedString key="attributedText">
+                                                                <fragment content="Push Navigation">
+                                                                    <attributes>
+                                                                        <font key="NSFont" size="13" name="HiraginoSans-W3"/>
+                                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="4" tighteningFactorForTruncation="0.0"/>
+                                                                    </attributes>
+                                                                </fragment>
+                                                            </attributedString>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="100" id="IaX-Vx-5rl"/>
+                                                        <constraint firstAttribute="bottom" secondItem="PqF-xf-LT7" secondAttribute="bottom" constant="8" id="hkK-Ya-Xze"/>
+                                                        <constraint firstAttribute="width" constant="144" id="jwp-5D-3P9"/>
+                                                        <constraint firstItem="PqF-xf-LT7" firstAttribute="leading" secondItem="G7b-Ls-1Kx" secondAttribute="leading" constant="8" id="kEh-N5-ysk"/>
+                                                        <constraint firstAttribute="trailing" secondItem="PqF-xf-LT7" secondAttribute="trailing" constant="8" id="nEU-4K-4Qx"/>
+                                                        <constraint firstItem="PqF-xf-LT7" firstAttribute="top" secondItem="G7b-Ls-1Kx" secondAttribute="top" constant="8" id="pJe-bk-Uud"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <integer key="value" value="8"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="G7b-Ls-1Kx" secondAttribute="bottom" constant="3" id="HUE-HN-cec"/>
+                                                <constraint firstAttribute="trailing" secondItem="G7b-Ls-1Kx" secondAttribute="trailing" constant="3" id="NGx-As-EwX"/>
+                                                <constraint firstItem="G7b-Ls-1Kx" firstAttribute="top" secondItem="hJS-4y-W6H" secondAttribute="top" constant="3" id="Xgc-z4-zX3"/>
+                                                <constraint firstItem="G7b-Ls-1Kx" firstAttribute="leading" secondItem="hJS-4y-W6H" secondAttribute="leading" constant="3" id="lCR-yf-rJm"/>
+                                            </constraints>
+                                        </collectionViewCellContentView>
+                                        <connections>
+                                            <outlet property="cornerView" destination="G7b-Ls-1Kx" id="YBi-F7-iWA"/>
+                                            <outlet property="cornerViewHeightConstraint" destination="IaX-Vx-5rl" id="M3k-bd-Of4"/>
+                                            <outlet property="cornerViewWidthConstraint" destination="jwp-5D-3P9" id="lX7-DO-3Ef"/>
+                                            <outlet property="textLabel" destination="PqF-xf-LT7" id="Kj6-fX-e6N"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="NavigationTestMenuVcMenuCollectionViewHeader" id="hLx-VC-ghB" customClass="NavigationTestMenuVcMenuCollectionViewHeader" customModule="CalendarIOs" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Parent Navigation" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EhR-ze-dD9">
+                                            <rect key="frame" x="19" y="12" width="376" height="38"/>
+                                            <fontDescription key="fontDescription" name="HiraginoSans-W3" family="Hiragino Sans" pointSize="13"/>
+                                            <color key="textColor" systemColor="secondaryLabelColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="EhR-ze-dD9" secondAttribute="trailing" constant="19" id="44e-Kl-7U2"/>
+                                        <constraint firstAttribute="bottom" secondItem="EhR-ze-dD9" secondAttribute="bottom" id="WCm-df-If9"/>
+                                        <constraint firstItem="EhR-ze-dD9" firstAttribute="leading" secondItem="hLx-VC-ghB" secondAttribute="leading" constant="19" id="aBc-Qf-ARg"/>
+                                        <constraint firstItem="EhR-ze-dD9" firstAttribute="top" secondItem="hLx-VC-ghB" secondAttribute="top" constant="12" id="ogZ-a3-lO9"/>
+                                    </constraints>
+                                    <connections>
+                                        <outlet property="textLabel" destination="EhR-ze-dD9" id="TEm-nd-s7r"/>
+                                    </connections>
+                                </collectionReusableView>
+                                <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="NavigationTestMenuVcMenuCollectionViewFooter" id="bpB-L2-NeV">
+                                    <rect key="frame" x="0.0" y="150" width="414" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </collectionReusableView>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="fXF-mH-QYF" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="4bS-zI-v66"/>
+                            <constraint firstAttribute="bottom" secondItem="fXF-mH-QYF" secondAttribute="bottom" id="4hN-AG-ucr"/>
+                            <constraint firstItem="fXF-mH-QYF" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="8Pw-X6-tD0"/>
+                            <constraint firstAttribute="trailing" secondItem="fXF-mH-QYF" secondAttribute="trailing" id="XMG-2c-kZu"/>
+                        </constraints>
+                    </view>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="menuCollectionView" destination="fXF-mH-QYF" id="ToI-oW-1Sb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="41" y="76"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="secondaryLabelColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="secondarySystemBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
