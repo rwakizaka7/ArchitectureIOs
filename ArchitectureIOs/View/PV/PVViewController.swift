@@ -1,5 +1,5 @@
 //
-//  PVBase.swift
+//  PVViewController.swift
 //  CalendarIOs
 //
 //  Created by 脇坂亮汰 on 2021/05/02.
@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-protocol PVBase: PVLinkable, EClass, UIAdaptivePresentationControllerDelegate {
+protocol PVViewController: PVLinkable, EClass, UIAdaptivePresentationControllerDelegate {
     var modalPresenting: Bool { get set }
     func presentingCompletion()
     func dismissalStating()
@@ -17,7 +17,7 @@ protocol PVBase: PVLinkable, EClass, UIAdaptivePresentationControllerDelegate {
     func dismissalCompletion()
 }
 
-extension PVBase {
+extension PVViewController {
     // viewWillAppear
     func setNavigationStructure() {
         let ns = vCIndex.navigationStructure
@@ -27,13 +27,13 @@ extension PVBase {
     
     // viewDidAppear
     func presentingViewControllerDismissalCancel() {
-        if var modalPresenting = (presentingViewController as? PVBase)?.modalPresenting,
+        if var modalPresenting = (presentingViewController as? PVViewController)?.modalPresenting,
            modalPresenting {
             modalPresenting = false
             sendAction(.dismissalCancel, params: [:], broadcast: false)
             dismissalCancel()
             print("\(className) pageSheet viewDidAppear modalPresenting=\(modalPresenting)")
-            (presentingViewController as? PVBase)?.modalPresenting = modalPresenting
+            (presentingViewController as? PVViewController)?.modalPresenting = modalPresenting
         }
     }
     
@@ -163,7 +163,7 @@ extension PVBase {
                 }
                 
                 self.getChildren([self]).forEach {
-                    guard let vc = ($0 as? PVBase) else {
+                    guard let vc = ($0 as? PVViewController) else {
                         return
                     }
                     vc.sendAction(.dismissalCompletion, params: [:], broadcast: false)
@@ -201,7 +201,7 @@ extension PVBase {
     
     func presentationControllerDismissalStating() {
         let modalPresenting = true
-        (getTopVc(self) as? PVBase)?.modalPresenting = modalPresenting
+        (getTopVc(self) as? PVViewController)?.modalPresenting = modalPresenting
         
         sendAction(.dismissalStating, params: [:], broadcast: false)
         dismissalStating()
@@ -210,7 +210,7 @@ extension PVBase {
     
     func presentationControllerDismissalCompletion() {
         let modalPresenting = false
-        (getTopVc(self) as? PVBase)?.modalPresenting = modalPresenting
+        (getTopVc(self) as? PVViewController)?.modalPresenting = modalPresenting
         
         sendAction(.dismissalCompletion, params: [:], broadcast: false)
         dismissalCompletion()

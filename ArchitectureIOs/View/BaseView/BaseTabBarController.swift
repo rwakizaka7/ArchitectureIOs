@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class BaseTabBarController: UITabBarController, PVBase {
+class BaseTabBarController: UITabBarController, PVViewController {
     var vCIndex: VCStructureIndex!
     var modalPresenting = false
     

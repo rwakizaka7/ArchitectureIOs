@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class BaseNavigationController: UINavigationController, PVBase {
+class BaseNavigationController: UINavigationController, PVViewController {
     var vCIndex: VCStructureIndex!
     var modalPresenting = false
     
@@ -96,21 +96,21 @@ extension BaseNavigationController: UINavigationControllerDelegate {
 //            }
             
             if context.isCancelled {
-//                let sourceVc = context.viewController(forKey: .from) as! PVBase
-//                let destinationVc = context.viewController(forKey: .to) as! PVBase
+//                let sourceVc = context.viewController(forKey: .from) as! PVViewController
+//                let destinationVc = context.viewController(forKey: .to) as! PVViewController
 //
 //                print("BaseNavigationController willShow cancelled \(self.vCIndex!) "
 //                      + "\(sourceVc.vCIndex!) \(destinationVc.vCIndex!)")
             }
         }
         
-//        let destinationIndex = (viewController as! PVBase).vCIndex!
+//        let destinationIndex = (viewController as! PVViewController).vCIndex!
 //        print("BaseNavigationController willShow \(vCIndex!) \(destinationIndex)")
     }
     
     func navigationController(_ navigationController: UINavigationController,
                               didShow viewController: UIViewController, animated: Bool) {
-//        let destinationIndex = (viewController as! PVBase).vCIndex!
+//        let destinationIndex = (viewController as! PVViewController).vCIndex!
 //        print("BaseNavigationController didShow \(vCIndex!) \(destinationIndex) \(animated)")
     }
 }

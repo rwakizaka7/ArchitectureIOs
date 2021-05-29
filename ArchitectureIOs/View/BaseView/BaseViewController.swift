@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class BaseViewController: UIViewController, PVBase {
+class BaseViewController: UIViewController, PVViewController {
     var vCIndex: VCStructureIndex!
     var modalPresenting = false
     
