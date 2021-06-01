@@ -12,6 +12,7 @@
 		CF089DC2265A73D500A6AAFB /* NavigationTestMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF089DC0265A73D500A6AAFB /* NavigationTestMenuViewController.swift */; };
 		CF089DC5265A742E00A6AAFB /* VerificationMenuVCModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF089DC3265A742E00A6AAFB /* VerificationMenuVCModel.swift */; };
 		CF089DC6265A742E00A6AAFB /* NavigationTestMenuVCModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF089DC4265A742E00A6AAFB /* NavigationTestMenuVCModel.swift */; };
+		CF3202F326663D6600D20461 /* PVLinkable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3202F226663D6600D20461 /* PVLinkable.swift */; };
 		CFCE53EE2653D73B009C947F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCE53ED2653D73B009C947F /* AppDelegate.swift */; };
 		CFCE53F02653D73B009C947F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCE53EF2653D73B009C947F /* SceneDelegate.swift */; };
 		CFCE53F72653D73C009C947F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFCE53F62653D73C009C947F /* Assets.xcassets */; };
@@ -47,6 +48,7 @@
 		CF089DC0265A73D500A6AAFB /* NavigationTestMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationTestMenuViewController.swift; sourceTree = "<group>"; };
 		CF089DC3265A742E00A6AAFB /* VerificationMenuVCModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerificationMenuVCModel.swift; sourceTree = "<group>"; };
 		CF089DC4265A742E00A6AAFB /* NavigationTestMenuVCModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationTestMenuVCModel.swift; sourceTree = "<group>"; };
+		CF3202F226663D6600D20461 /* PVLinkable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PVLinkable.swift; sourceTree = "<group>"; };
 		CFCE53EA2653D73B009C947F /* ArchitectureIOs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArchitectureIOs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFCE53ED2653D73B009C947F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CFCE53EF2653D73B009C947F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 			isa = PBXGroup;
 			children = (
 				CFCE540C2653D7CE009C947F /* PVViewController.swift */,
+				CF3202F226663D6600D20461 /* PVLinkable.swift */,
 				CFCE540B2653D7CE009C947F /* PVCellCornerViewHighlight.swift */,
 			);
 			path = PV;
@@ -282,6 +285,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF3202F326663D6600D20461 /* PVLinkable.swift in Sources */,
 				CFCE543B2653D7CE009C947F /* BaseModel.swift in Sources */,
 				CFCE542D2653D7CE009C947F /* PVCellCornerViewHighlight.swift in Sources */,
 				CFCE542E2653D7CE009C947F /* PVViewController.swift in Sources */,

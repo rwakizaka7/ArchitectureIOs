@@ -82,19 +82,6 @@ enum VCStructureIndex {
         }
     }
     
-    var tabBarStructure: TabBarStructure {
-        typealias S = TabBarStructure
-        switch self {
-        
-        case .navigationTestTabBarItem1ViewNavigation:
-            return S(iconImage: UIImage(systemName: "cloud"), title: "タブ1")
-        case .navigationTestTabBarItem2ViewNavigation:
-            return S(iconImage: UIImage(systemName: "cloud"), title: "タブ2")
-        default:
-            return S(iconImage: UIImage(systemName: "icloud.and.arrow.down"), title: "タイトル")
-        }
-    }
-    
     var navigationStructure: NavigationStructure {
         typealias S = NavigationStructure
         switch self {
@@ -108,6 +95,19 @@ enum VCStructureIndex {
             return S(hidden: false, title: "タブバー(タブ2)")
         default:
             return S(hidden: true, title: nil)
+        }
+    }
+    
+    var tabBarStructure: TabBarStructure {
+        typealias S = TabBarStructure
+        switch self {
+        
+        case .navigationTestTabBarItem1ViewNavigation:
+            return S(iconImage: UIImage(systemName: "cloud"), title: "タブ1")
+        case .navigationTestTabBarItem2ViewNavigation:
+            return S(iconImage: UIImage(systemName: "cloud"), title: "タブ2")
+        default:
+            return S(iconImage: UIImage(systemName: "icloud.and.arrow.down"), title: "タイトル")
         }
     }
     
@@ -137,50 +137,8 @@ enum VCStructureIndex {
     }
 }
 
-protocol PVLinkable: UIViewController {
-    var vCIndex: VCStructureIndex! { get set }
-    func sendAction(_ action: ActionFromView, params: [String:Any], broadcast: Bool)
-}
-
-extension PVLinkable {
-    func sendActionChildren(_ action: ActionFromView, params: [String:Any]) {
-        getChildren([self]).forEach {
-            ($0 as? PVLinkable)?.sendAction(action, params: params, broadcast: false)
-        }
-    }
-    
-    func getTopVc(_ vc: UIViewController) -> UIViewController? {
-        return getParent(vc) ?? vc
-    }
-    
-    func getParent(_ vc: UIViewController, recursion: Bool = true) -> UIViewController? {
-        let vc = vc.parent
-        if !recursion || vc?.parent == nil {
-            return vc
-        } else {
-            return getParent(vc!)
-        }
-    }
-    
-    func getChildren(_ vCS: [UIViewController], totalVCS: [UIViewController]? = nil,
-                     recursion: Bool = true) -> [UIViewController] {
-        let _vCS = vCS.reduce(into: [UIViewController]()) {
-            vCS, vc in
-            vCS.append(contentsOf: vc.children)
-        }
-        var _totalVCS = totalVCS ?? vCS
-        _totalVCS.append(contentsOf: _vCS)
-        
-        if !recursion || _vCS.count == 0 {
-            return _totalVCS
-        } else {
-            return getChildren(_vCS, totalVCS: _totalVCS)
-        }
-    }
-}
-
 class VCManager {
-    static func createVC(_ index: VCStructureIndex) -> PVLinkable {
+    static func generateVC(_ index: VCStructureIndex) -> PVLinkable {
         let structure = index.vCStructure
         let storyboardName = structure.storyboardName
         let storyboardId = structure.storyboardId ?? structure.storyboardName
@@ -195,7 +153,7 @@ class VCManager {
                 (vc as! UINavigationController)
                     .setViewControllers(index.setViewControllers.enumerated().map({
                         (i, index) in
-                        let vc = createVC(index)
+                        let vc = generateVC(index)
                         vc.sendAction(.navigationStructure, params: ["navigation_index": i], broadcast: false)
                         return vc
                 }), animated: false)
@@ -208,7 +166,7 @@ class VCManager {
             let vcs: [UIViewController] = index.setViewControllers.enumerated().map {
                 (i, type) -> UIViewController in
                 let tbs = type.tabBarStructure
-                let innerVc = createVC(type)
+                let innerVc = generateVC(type)
 
                 let image: UIImage! = tbs.iconImage == nil ? nil : tbs.iconImage
                 innerVc.sendActionChildren(.tabBarStructure, params: ["tab_bar_index": i])

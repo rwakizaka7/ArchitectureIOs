@@ -97,20 +97,6 @@ class ViewModel<T: BaseModel>: NSObject, EClass {
         print("deinit \(className)!!")
     }
     
-    func sendAction(_ action: ActionFromView, params: [String:Any]) {
-        var object: (BaseModel, [ActionFromView:Any])
-        object.0 = model
-        object.1 = [action:params]
-        NotificationCenter.default.post(name: .actionFromView, object: object)
-    }
-    
-    func sendAction(_ action: ActionFromModel, params: [String:Any]) {
-        var object: (ViewModel<T>, [ActionFromModel:Any])
-        object.0 = self
-        object.1 = [action:params]
-        NotificationCenter.default.post(name: .actionFromModel, object: object)
-    }
-    
     @objc func notificationFromView(_ notification: Notification) {
         guard let values = notification.object as? (
                 ViewModel?, [ActionFromView:Any]),
@@ -145,5 +131,19 @@ class ViewModel<T: BaseModel>: NSObject, EClass {
         }
 
         sendAction(action, params: params)
+    }
+    
+    func sendAction(_ action: ActionFromModel, params: [String:Any]) {
+        var object: (ViewModel<T>, [ActionFromModel:Any])
+        object.0 = self
+        object.1 = [action:params]
+        NotificationCenter.default.post(name: .actionFromModel, object: object)
+    }
+    
+    func sendAction(_ action: ActionFromView, params: [String:Any]) {
+        var object: (BaseModel, [ActionFromView:Any])
+        object.0 = model
+        object.1 = [action:params]
+        NotificationCenter.default.post(name: .actionFromView, object: object)
     }
 }

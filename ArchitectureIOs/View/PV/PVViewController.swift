@@ -45,7 +45,7 @@ extension PVViewController {
             let vCIndex = params["vc_index"] as! VCStructureIndex
             let inputParams = params["input_params"] as? [String:Any] ?? [:]
             let animated = params["animated"] as? Bool ?? true
-            let vc = VCManager.createVC(vCIndex)
+            let vc = VCManager.generateVC(vCIndex)
             vc.sendAction(.navigationStructure, params: ["navigation_index": nc.children.count], broadcast: false)
             vc.sendActionChildren(.inputParams, params: inputParams)
             nc.pushViewController(vc, animated: animated)
@@ -88,7 +88,7 @@ extension PVViewController {
                     return
                 }
                 
-                let vc = VCManager.createVC(vCIndex)
+                let vc = VCManager.generateVC(vCIndex)
                 vc.sendActionChildren(.inputParams, params: inputParams)
                 window.rootViewController = vc
             }
@@ -134,7 +134,7 @@ extension PVViewController {
                 break
             }
             
-            let vc = VCManager.createVC(vCIndex)
+            let vc = VCManager.generateVC(vCIndex)
             vc.modalPresentationStyle = modalPresentationStyle
             vc.modalTransitionStyle = modalTransitionStyle
             if modalPresentationStyle == .pageSheet

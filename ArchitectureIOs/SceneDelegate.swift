@@ -23,7 +23,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: scene)
         if let window = window {
             window.makeKeyAndVisible()
-            window.rootViewController = VCManager.createVC(.verificationMenuViewNavigation)
+            window.rootViewController = VCManager.generateVC(.verificationMenuViewNavigation)
         }
     }
 
