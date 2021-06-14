@@ -39,12 +39,6 @@ class VerificationMenuViewController: LinkViewController<VerificationMenuVCModel
         switch action {
         case .dataSetting:
             sections = params["sections"] as? [S] ?? []
-        case .tableViewCellSelecting:
-            if let indexPath = params["index_path"] as? IndexPath {
-                menuTableView.selectRow(at: indexPath, animated: false,
-                                        scrollPosition: .middle)
-                selectionIndexPath = indexPath
-            }
         default:
             break
         }

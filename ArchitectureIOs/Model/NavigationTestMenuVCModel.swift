@@ -16,7 +16,6 @@ class NavigationTestMenuVCModel: LinkModel {
     
     var navigationIndex: Int!
     var tabBarIndex: Int!
-    
     var previousVcIndexPath: IndexPath!
     var parentNavigationIndex: Int!
     var pushedNavigation = false
@@ -80,11 +79,9 @@ class NavigationTestMenuVCModel: LinkModel {
                         return section
                     }
                 case 4:
-                    if navigationIndex != 1 || tabBar {
-                        var section = S(title: title, cells: [])
-                        section.cells.append(C(title: "リセット", actionId: .replaceRootViewController))
-                        return section
-                    }
+                    var section = S(title: title, cells: [])
+                    section.cells.append(C(title: "メニューへ", actionId: .replaceRootViewController))
+                    return section
                 default:
                     break
                 }
@@ -152,8 +149,7 @@ class NavigationTestMenuVCModel: LinkModel {
             case .dismiss:
                 sendAction(.presentingVCAction(.dismiss))
             case .replaceRootViewController:
-                let params = createParams(pushedNavigation: true,
-                                          autoSelectionIndexPath: previousVcIndexPath)
+                let params = createParams(pushedNavigation: true)
                 sendAction(.replaceRootViewController,
                            params: ["vc_index": VCStructureIndex.verificationMenuViewNavigation,
                                     "input_params": params])
@@ -166,8 +162,7 @@ class NavigationTestMenuVCModel: LinkModel {
     
     func createParams(previousVcIndexPath: IndexPath? = nil, tabBarIndex: Int? = nil,
                       parentNavigationIndex: Int? = nil, pushedNavigation: Bool,
-                      presentedView: Bool? = nil, tabBar: Bool? = nil,
-                      autoSelectionIndexPath: IndexPath? = nil) -> [String:Any] {
+                      presentedView: Bool? = nil, tabBar: Bool? = nil) -> [String:Any] {
         var params: [String:Any] = [:]
         if let previousVcIndexPath = previousVcIndexPath {
             params["previous_vc_index_path"] = previousVcIndexPath
@@ -184,9 +179,6 @@ class NavigationTestMenuVCModel: LinkModel {
         }
         if let tabBar = tabBar {
             params["tab_bar"] = tabBar
-        }
-        if let autoSelectionIndexPath = autoSelectionIndexPath {
-            params["auto_selection_index_path"] = autoSelectionIndexPath
         }
         return params
         

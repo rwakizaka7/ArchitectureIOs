@@ -53,7 +53,6 @@ indirect enum ActionFromModel: Hashable {
     case pushParentNavigation
     case popParentNavigation
     case dataSetting
-    case tableViewCellSelecting
     case reloadData
     case calendarFunc(CalendarFunctionActionFromModel)
 }
