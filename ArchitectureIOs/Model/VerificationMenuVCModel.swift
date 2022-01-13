@@ -13,23 +13,8 @@ class VerificationMenuVCModel: LinkModel  {
     typealias C = VerificationMenuVCMenuTableCell
     
     let sections: [S] = [S(title: "画面遷移", cells:
-                            [C(title: "ナビゲーションテスト", actionId: .navigationTest),
-                             C(title: "ナビゲーションテスト", actionId: .navigationTest),
-                             C(title: "ナビゲーションテスト", actionId: .navigationTest),
-                             C(title: "ナビゲーションテスト", actionId: .navigationTest),
-                             C(title: "ナビゲーションテスト", actionId: .navigationTest),
-                             C(title: "ナビゲーションテスト", actionId: .navigationTest),
-                             C(title: "ナビゲーションテスト", actionId: .navigationTest),
-                             C(title: "ナビゲーションテスト", actionId: .navigationTest),
-                             C(title: "ナビゲーションテスト", actionId: .navigationTest),
-                             C(title: "ナビゲーションテスト", actionId: .navigationTest),
-                             C(title: "ナビゲーションテスト", actionId: .navigationTest),
-                             C(title: "ナビゲーションテスト", actionId: .navigationTest),
-                             C(title: "ナビゲーションテスト", actionId: .navigationTest),
-                             C(title: "ナビゲーションテスト", actionId: .navigationTest),
-                             C(title: "ナビゲーションテスト", actionId: .navigationTest),
-                             C(title: "ナビゲーションテスト", actionId: .navigationTest),
-                             C(title: "ナビゲーションテスト", actionId: .navigationTest)])]
+                            [C(title: "ナビゲーション遷移テスト", actionId: .navigationTestTransition),
+                             C(title: "WebAPI呼び出しテスト", actionId: .webApiCallingTestTransition)])]
     
     override func receiveAction(_ action: ActionFromView, params: [String:Any]) {
         super.receiveAction(action, params: params)
@@ -44,9 +29,14 @@ class VerificationMenuVCModel: LinkModel  {
             }
             
             switch actionId {
-            case .navigationTest:
+            case .navigationTestTransition:
                 sendAction(.parentAction(.pushNavigation),
                            params: ["vc_index": VCStructureIndex.navigationTestMenuView,
+                                    "input_params": ["previous_vc_index_path":indexPath,
+                                                     "pushed_navigation":true]])
+            case .webApiCallingTestTransition:
+                sendAction(.parentAction(.pushNavigation),
+                           params: ["vc_index": VCStructureIndex.webApiCallingTestView,
                                     "input_params": ["previous_vc_index_path":indexPath,
                                                      "pushed_navigation":true]])
             }

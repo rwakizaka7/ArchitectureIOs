@@ -7,25 +7,16 @@
 //
 
 import Foundation
+import UIKit
 
-enum ModalPresentationStyle {
-    case pageSheet
-    case formSheet
-    case currentContext
-    case fullScreen
-    case overCurrentContext
-    case overFullScreen
-}
-
-enum ModalTransitionStyle {
-    case coverVertical
-    case crossDissolve
-    case flipHorizontal
-    case partialCurl
-}
+typealias ModalPresentationStyle = UIModalPresentationStyle
+typealias ModalTransitionStyle = UIModalTransitionStyle
+typealias AlertStyle = UIAlertController.Style
+typealias AlertActionStyle = UIAlertAction.Style
 
 enum VerificationMenuVCActionId {
-    case navigationTest
+    case navigationTestTransition
+    case webApiCallingTestTransition
 }
 
 struct VerificationMenuVCMenuTableSection {
@@ -47,6 +38,20 @@ enum NavigationTestMenuVCMenuVCActionId {
     case presentOverFullScreen
     case dismiss
     case replaceRootViewController
+}
+
+struct WebApiCallingTestVCMenuTableSection {
+    var title: String!
+    var cells: [WebApiCallingTestVCMenuTableCell] = []
+}
+
+struct WebApiCallingTestVCMenuTableCell {
+    var title: String!
+    var actionId: WebApiCallingTestVCMenuVCActionId!
+}
+
+enum WebApiCallingTestVCMenuVCActionId {
+    case api1Calling
 }
 
 struct NavigationTestMenuVCMenuTableSection {

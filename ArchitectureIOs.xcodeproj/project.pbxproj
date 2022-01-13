@@ -13,6 +13,9 @@
 		CF089DC5265A742E00A6AAFB /* VerificationMenuVCModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF089DC3265A742E00A6AAFB /* VerificationMenuVCModel.swift */; };
 		CF089DC6265A742E00A6AAFB /* NavigationTestMenuVCModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF089DC4265A742E00A6AAFB /* NavigationTestMenuVCModel.swift */; };
 		CF3202F326663D6600D20461 /* PVLinkable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3202F226663D6600D20461 /* PVLinkable.swift */; };
+		CF740E41279007DB0087D47A /* WebApiCallingTestViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF740E40279007DB0087D47A /* WebApiCallingTestViewController.storyboard */; };
+		CF740E43279008A50087D47A /* WebApiCallingTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF740E42279008A50087D47A /* WebApiCallingTestViewController.swift */; };
+		CF740E452790096D0087D47A /* WebApiCallingTestVCModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF740E442790096D0087D47A /* WebApiCallingTestVCModel.swift */; };
 		CFCE53EE2653D73B009C947F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCE53ED2653D73B009C947F /* AppDelegate.swift */; };
 		CFCE53F02653D73B009C947F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCE53EF2653D73B009C947F /* SceneDelegate.swift */; };
 		CFCE53F72653D73C009C947F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFCE53F62653D73C009C947F /* Assets.xcassets */; };
@@ -49,6 +52,9 @@
 		CF089DC3265A742E00A6AAFB /* VerificationMenuVCModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerificationMenuVCModel.swift; sourceTree = "<group>"; };
 		CF089DC4265A742E00A6AAFB /* NavigationTestMenuVCModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationTestMenuVCModel.swift; sourceTree = "<group>"; };
 		CF3202F226663D6600D20461 /* PVLinkable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PVLinkable.swift; sourceTree = "<group>"; };
+		CF740E40279007DB0087D47A /* WebApiCallingTestViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = WebApiCallingTestViewController.storyboard; sourceTree = "<group>"; };
+		CF740E42279008A50087D47A /* WebApiCallingTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebApiCallingTestViewController.swift; sourceTree = "<group>"; };
+		CF740E442790096D0087D47A /* WebApiCallingTestVCModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebApiCallingTestVCModel.swift; sourceTree = "<group>"; };
 		CFCE53EA2653D73B009C947F /* ArchitectureIOs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArchitectureIOs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFCE53ED2653D73B009C947F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CFCE53EF2653D73B009C947F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -134,6 +140,7 @@
 				CFCE54042653D7CE009C947F /* TabBarController.storyboard */,
 				CF089DBD265A726700A6AAFB /* VerificationMenuViewController.storyboard */,
 				CFCE54072653D7CE009C947F /* NavigationTestMenuViewController.storyboard */,
+				CF740E40279007DB0087D47A /* WebApiCallingTestViewController.storyboard */,
 			);
 			path = Storyboard;
 			sourceTree = "<group>";
@@ -147,6 +154,7 @@
 				CFCE54172653D7CE009C947F /* TabBarController.swift */,
 				CF089DBF265A73D500A6AAFB /* VerificationMenuViewController.swift */,
 				CF089DC0265A73D500A6AAFB /* NavigationTestMenuViewController.swift */,
+				CF740E42279008A50087D47A /* WebApiCallingTestViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -182,6 +190,7 @@
 				CFCE541E2653D7CE009C947F /* TabBarControllerModel.swift */,
 				CF089DC3265A742E00A6AAFB /* VerificationMenuVCModel.swift */,
 				CF089DC4265A742E00A6AAFB /* NavigationTestMenuVCModel.swift */,
+				CF740E442790096D0087D47A /* WebApiCallingTestVCModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -273,6 +282,7 @@
 				CFCE53F72653D73C009C947F /* Assets.xcassets in Resources */,
 				CFCE54292653D7CE009C947F /* TabBarController.storyboard in Resources */,
 				CFCE542A2653D7CE009C947F /* LaunchScreen.storyboard in Resources */,
+				CF740E41279007DB0087D47A /* WebApiCallingTestViewController.storyboard in Resources */,
 				CFCE54282653D7CE009C947F /* NavigationController.storyboard in Resources */,
 				CF089DBE265A726700A6AAFB /* VerificationMenuViewController.storyboard in Resources */,
 			);
@@ -286,10 +296,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				CF3202F326663D6600D20461 /* PVLinkable.swift in Sources */,
+				CF740E43279008A50087D47A /* WebApiCallingTestViewController.swift in Sources */,
 				CFCE543B2653D7CE009C947F /* BaseModel.swift in Sources */,
 				CFCE542D2653D7CE009C947F /* PVCellCornerViewHighlight.swift in Sources */,
 				CFCE542E2653D7CE009C947F /* PVViewController.swift in Sources */,
 				CF089DC5265A742E00A6AAFB /* VerificationMenuVCModel.swift in Sources */,
+				CF740E452790096D0087D47A /* WebApiCallingTestVCModel.swift in Sources */,
 				CFCE54382653D7CE009C947F /* TabBarController.swift in Sources */,
 				CFCE542F2653D7CE009C947F /* BaseTabBarController.swift in Sources */,
 				CFCE54432653D7CE009C947F /* ViewModel.swift in Sources */,

@@ -34,6 +34,7 @@ enum ActionFromView: Hashable {
     case collectionViewDisplaying
     case collectionViewReleasing
     case collectionViewSelection
+    case messageBoxSelection
     case calendarFunc(CalendarFunctionActionFromView)
     case defaultCalendarVc(DefaultCalendarVcActionFromView)
 }
@@ -52,8 +53,10 @@ indirect enum ActionFromModel: Hashable {
     case popNavigation
     case pushParentNavigation
     case popParentNavigation
+    case messageBox
     case dataSetting
     case reloadData
+    case cellUnselection
     case calendarFunc(CalendarFunctionActionFromModel)
 }
 

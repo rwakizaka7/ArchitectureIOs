@@ -25,6 +25,7 @@ enum VCStructureIndex {
     case navigationTestTabBarItem4View
     case navigationTestTabBarItem5ViewNavigation
     case navigationTestTabBarItem5View
+    case webApiCallingTestView
     
     struct VCStructure {
         enum ControllerType {
@@ -79,6 +80,8 @@ enum VCStructureIndex {
              .navigationTestTabBarItem3View, .navigationTestTabBarItem4View,
              .navigationTestTabBarItem5View:
             return S(type: .view, storyboardName: "NavigationTestMenuViewController")
+        case .webApiCallingTestView:
+            return S(type: .view, storyboardName: "WebApiCallingTestViewController")
         }
     }
     
@@ -88,11 +91,13 @@ enum VCStructureIndex {
         case .verificationMenuView:
             return S(hidden: false, title: "検証メニュー")
         case .navigationTestMenuView:
-            return S(hidden: false, title: "ナビゲーションテスト")
+            return S(hidden: false, title: "ナビゲーション遷移テスト")
         case .navigationTestTabBarItem1View:
             return S(hidden: false, title: "タブバー(タブ1)")
         case .navigationTestTabBarItem2View:
             return S(hidden: false, title: "タブバー(タブ2)")
+        case .webApiCallingTestView:
+            return S(hidden: false, title: "WebAPI呼び出しテスト")
         default:
             return S(hidden: true, title: nil)
         }

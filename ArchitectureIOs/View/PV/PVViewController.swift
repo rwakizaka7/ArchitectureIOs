@@ -99,40 +99,10 @@ extension PVViewController {
             let vCIndex = params["vc_index"] as! VCStructureIndex
             let inputParams = params["input_params"] as? [String:Any] ?? [:]
             let animated = params["animated"] as? Bool ?? true
-            let modalPresentiationStyleString = params["modal_presentation_style"] as? ModalPresentationStyle
-            let modalTransitionStyleString = params["modal_transition_style"] as? ModalTransitionStyle
-            
-            var modalPresentationStyle: UIModalPresentationStyle = .formSheet
-            switch modalPresentiationStyleString {
-            case .pageSheet:
-                modalPresentationStyle = .pageSheet
-            case .formSheet:
-                modalPresentationStyle = .formSheet
-            case .currentContext:
-                modalPresentationStyle = .currentContext
-            case .fullScreen:
-                modalPresentationStyle = .fullScreen
-            case .overCurrentContext:
-                modalPresentationStyle = .overCurrentContext
-            case .overFullScreen:
-                modalPresentationStyle = .overFullScreen
-            default:
-                break
-            }
-            
-            var modalTransitionStyle: UIModalTransitionStyle = .coverVertical
-            switch modalTransitionStyleString {
-            case .coverVertical:
-                modalTransitionStyle = .coverVertical
-            case .crossDissolve:
-                modalTransitionStyle = .crossDissolve
-            case .flipHorizontal:
-                modalTransitionStyle = .flipHorizontal
-            case .partialCurl:
-                modalTransitionStyle = .partialCurl
-            default:
-                break
-            }
+            let modalPresentationStyle = params["modal_presentation_style"] as? ModalPresentationStyle
+                ?? .formSheet
+            let modalTransitionStyle = params["modal_transition_style"] as? ModalTransitionStyle
+                ?? .coverVertical
             
             let vc = VCManager.generateVC(vCIndex)
             vc.modalPresentationStyle = modalPresentationStyle
@@ -194,6 +164,30 @@ extension PVViewController {
                 let animated = params["animated"] as? Bool ?? true
                 nc.popViewController(animated: animated)
             }
+        case .messageBox:
+            let messageBoxId = params["message_box_id"] as! String
+            let title = params["title"] as? String
+            let message = params["message"] as? String
+            let preferredStyle = params["preferred_style"] as! AlertStyle
+            let selectionActions = params["selection_actions"] as? [(title: String?, style: AlertActionStyle)] ?? []
+            let animated = params["animated"] as? Bool ?? true
+            
+            let alert = UIAlertController(title: title, message: message,
+                                          preferredStyle: preferredStyle)
+            selectionActions.forEach {
+                selectionAction in
+                alert.addAction(UIAlertAction(title: selectionAction.title, style: selectionAction.style) {
+                    [weak self] alertAction in
+                    guard let self = self else {
+                        return
+                    }
+                    self.sendAction(.messageBoxSelection,
+                        params: ["message_box_id": messageBoxId,
+                                 "alert_action_style": alertAction.style], broadcast: false)
+                })
+            }
+            
+            present(alert, animated: animated)
         default:
             break
         }
