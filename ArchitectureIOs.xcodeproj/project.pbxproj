@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -16,6 +16,8 @@
 		CF740E41279007DB0087D47A /* WebApiCallingTestViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF740E40279007DB0087D47A /* WebApiCallingTestViewController.storyboard */; };
 		CF740E43279008A50087D47A /* WebApiCallingTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF740E42279008A50087D47A /* WebApiCallingTestViewController.swift */; };
 		CF740E452790096D0087D47A /* WebApiCallingTestVCModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF740E442790096D0087D47A /* WebApiCallingTestVCModel.swift */; };
+		CF740E9F2790A40C0087D47A /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = CF740E9E2790A40C0087D47A /* Alamofire */; };
+		CF740EA1279163580087D47A /* AlamofireRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF740EA0279163580087D47A /* AlamofireRepository.swift */; };
 		CFCE53EE2653D73B009C947F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCE53ED2653D73B009C947F /* AppDelegate.swift */; };
 		CFCE53F02653D73B009C947F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCE53EF2653D73B009C947F /* SceneDelegate.swift */; };
 		CFCE53F72653D73C009C947F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFCE53F62653D73C009C947F /* Assets.xcassets */; };
@@ -55,6 +57,8 @@
 		CF740E40279007DB0087D47A /* WebApiCallingTestViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = WebApiCallingTestViewController.storyboard; sourceTree = "<group>"; };
 		CF740E42279008A50087D47A /* WebApiCallingTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebApiCallingTestViewController.swift; sourceTree = "<group>"; };
 		CF740E442790096D0087D47A /* WebApiCallingTestVCModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebApiCallingTestVCModel.swift; sourceTree = "<group>"; };
+		CF740E9A2790A27E0087D47A /* Alamofire-5.3.0 */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "Alamofire-5.3.0"; path = "Packages/Alamofire-5.3.0"; sourceTree = "<group>"; };
+		CF740EA0279163580087D47A /* AlamofireRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireRepository.swift; sourceTree = "<group>"; };
 		CFCE53EA2653D73B009C947F /* ArchitectureIOs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArchitectureIOs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFCE53ED2653D73B009C947F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CFCE53EF2653D73B009C947F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -91,17 +95,35 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF740E9F2790A40C0087D47A /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CF740E992790A27E0087D47A /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				CF740E9A2790A27E0087D47A /* Alamofire-5.3.0 */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
+		CF740E9D2790A40C0087D47A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		CFCE53E12653D73B009C947F = {
 			isa = PBXGroup;
 			children = (
+				CF740E992790A27E0087D47A /* Packages */,
 				CFCE53EC2653D73B009C947F /* ArchitectureIOs */,
 				CFCE53EB2653D73B009C947F /* Products */,
+				CF740E9D2790A40C0087D47A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -217,6 +239,7 @@
 			isa = PBXGroup;
 			children = (
 				CFCE54252653D7CE009C947F /* EKEventStoreRepository.swift */,
+				CF740EA0279163580087D47A /* AlamofireRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -237,6 +260,9 @@
 			dependencies = (
 			);
 			name = ArchitectureIOs;
+			packageProductDependencies = (
+				CF740E9E2790A40C0087D47A /* Alamofire */,
+			);
 			productName = ArchitectureIOs;
 			productReference = CFCE53EA2653D73B009C947F /* ArchitectureIOs.app */;
 			productType = "com.apple.product-type.application";
@@ -264,6 +290,8 @@
 				Base,
 			);
 			mainGroup = CFCE53E12653D73B009C947F;
+			packageReferences = (
+			);
 			productRefGroup = CFCE53EB2653D73B009C947F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -321,6 +349,7 @@
 				CFCE54422653D7CE009C947F /* EKEventStoreRepository.swift in Sources */,
 				CF089DC1265A73D500A6AAFB /* VerificationMenuViewController.swift in Sources */,
 				CF089DC2265A73D500A6AAFB /* NavigationTestMenuViewController.swift in Sources */,
+				CF740EA1279163580087D47A /* AlamofireRepository.swift in Sources */,
 				CFCE54332653D7CE009C947F /* LinkNavigationController.swift in Sources */,
 				CFCE543D2653D7CE009C947F /* TabBarControllerModel.swift in Sources */,
 				CF089DC6265A742E00A6AAFB /* NavigationTestMenuVCModel.swift in Sources */,
@@ -517,6 +546,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CF740E9E2790A40C0087D47A /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Alamofire;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = CFCE53E22653D73B009C947F /* Project object */;
 }

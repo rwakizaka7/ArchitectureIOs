@@ -168,7 +168,7 @@ extension PVViewController {
             let messageBoxId = params["message_box_id"] as! String
             let title = params["title"] as? String
             let message = params["message"] as? String
-            let preferredStyle = params["preferred_style"] as! AlertStyle
+            let preferredStyle = params["preferred_style"] as? AlertStyle ?? .alert
             let selectionActions = params["selection_actions"] as? [(title: String?, style: AlertActionStyle)] ?? []
             let animated = params["animated"] as? Bool ?? true
             

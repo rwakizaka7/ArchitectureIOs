@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Alamofire
 
 class WebApiCallingTestVCModel: LinkModel {
     typealias S = WebApiCallingTestVCMenuTableSection
@@ -28,14 +29,45 @@ class WebApiCallingTestVCModel: LinkModel {
             
             switch actionId {
             case .api1Calling:
+
+                /*
                 sendAction(.messageBox, params: ["message_box_id": "api1_response",
                                                  "title":"タイトル",
                                                  "message":"メッセージ",
                                                  "preferred_style": AlertStyle.alert,
                                                  "selection_actions": [("OK", AlertActionStyle.default),
                                                                        ("キャンセル", AlertActionStyle.cancel)]])
+                 */
+                
+                let url = "https://xxxxx"
+                let params = ["xxxxx": "xxxxx"]//0986756
+                AFR.request(url, method: .get, parameters: params) {
+                        [weak self] response in
+                        guard let self = self else {
+                            return
+                        }
+                        
+                        switch response.result {
+                        case .success(let data):
+                            let json = try! JSONSerialization.jsonObject(with: data, options: []) as! [String:Any]
+                            print("keys=\(json.keys)")
+                            let results = json["xxxxx"] as! [[String:Any]]
+                            let xxxxx = results.first!["xxxxx"] as! String
+                            print("xxxxx=\(xxxxx)")
+                            
+                            self.sendAction(.messageBox, params: [
+                                "message_box_id": "api1_response",
+                                "message":"API呼び出し成功 \(url) \(params)",
+                                "selection_actions": [("OK", AlertActionStyle.default)]])
+                        case .failure(_):
+                            self.sendAction(.cellUnselection)
+                        }
+                    }
+                
             }
         case .messageBoxSelection:
+            
+            /*
             let messageBoxId = params["message_box_id"] as! String
             let alertAction = params["alert_action_style"] as! AlertActionStyle
             
@@ -50,8 +82,16 @@ class WebApiCallingTestVCModel: LinkModel {
             default:
                 break
             }
+             */
             
-            sendAction(.cellUnselection)
+            let messageBoxId = params["message_box_id"] as! String
+            
+            switch messageBoxId {
+            case "api1_response":
+                sendAction(.cellUnselection)
+            default:
+                break
+            }
         default:
             break
         }
