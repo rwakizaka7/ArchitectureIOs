@@ -13,8 +13,9 @@ class VerificationMenuVCModel: LinkModel  {
     typealias C = VerificationMenuVCMenuTableCell
     
     let sections: [S] = [S(title: "画面遷移", cells:
-                            [C(title: "ナビゲーション遷移テスト", actionId: .navigationTestTransition),
-                             C(title: "WebAPI呼び出しテスト", actionId: .webApiCallingTestTransition)])]
+                            [C(title: "ナビゲーション遷移テスト", actionId: .navigationTestTransition)]),
+                         S(title: "WebAPI", cells:
+                            [C(title: "WebAPI呼び出しテスト", actionId: .webApiCallingTestTransition)])]
     
     override func receiveAction(_ action: ActionFromView, params: [String:Any]) {
         super.receiveAction(action, params: params)

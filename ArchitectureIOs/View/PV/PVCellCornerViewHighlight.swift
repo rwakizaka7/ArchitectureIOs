@@ -15,14 +15,12 @@ protocol PVCellCornerViewHighlight {
 
 extension PVCellCornerViewHighlight {
     func updateBackground(highlighted: Bool, animated: Bool) {
-        let highlightedAlpha: CGFloat = 0.3
         
         let animations = {
             if !highlighted  {
                 self.cornerView.backgroundColor = .secondarySystemBackground
             } else {
-                self.cornerView.backgroundColor = .secondarySystemBackground
-                    .withAlphaComponent(highlightedAlpha)
+                self.cornerView.backgroundColor = .systemGray4
             }
         }
         

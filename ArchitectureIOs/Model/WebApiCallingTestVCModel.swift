@@ -40,8 +40,9 @@ class WebApiCallingTestVCModel: LinkModel {
                  */
                 
                 let url = "https://xxxxx"
+                let method: HTTPMethod = .get
                 let params = ["xxxxx": "xxxxx"]//0986756
-                AFR.request(url, method: .get, parameters: params) {
+                AFR.request(url, method: method, parameters: params) {
                         [weak self] response in
                         guard let self = self else {
                             return
@@ -57,10 +58,13 @@ class WebApiCallingTestVCModel: LinkModel {
                             
                             self.sendAction(.messageBox, params: [
                                 "message_box_id": "api1_response",
-                                "message":"API呼び出し成功 \(url) \(params)",
+                                "message":"API呼び出し成功 \(url) \(method) \(params)",
                                 "selection_actions": [("OK", AlertActionStyle.default)]])
                         case .failure(_):
-                            self.sendAction(.cellUnselection)
+                            self.sendAction(.messageBox, params: [
+                                "message_box_id": "api1_response",
+                                "message":"API呼び出し失敗 \(url) \(method) \(params)",
+                                "selection_actions": [("OK", AlertActionStyle.default)]])
                         }
                     }
                 

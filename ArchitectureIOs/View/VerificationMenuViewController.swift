@@ -31,8 +31,6 @@ class VerificationMenuViewController: LinkViewController<VerificationMenuVCModel
     
     var selectionIndexPath: IndexPath!
     
-    let sectionHeaderHeight: CGFloat = 45
-    
     override func receiveAction(_ action: ActionFromModel, params: [String : Any]) {
         super.receiveAction(action, params: params)
         
@@ -66,12 +64,27 @@ class VerificationMenuViewController: LinkViewController<VerificationMenuVCModel
         selectionIndexPath = indexPath
     }
     
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return sectionHeaderHeight
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return sections.count
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return sections[section].title
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 30
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 1
+    }
+    
+//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        return sections[section].title
+//    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = UITableViewHeaderFooterView()
+        view.textLabel?.text = sections[section].title
+        //view.contentView.backgroundColor = .orange
+        return view
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
