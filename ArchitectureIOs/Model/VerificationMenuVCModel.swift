@@ -15,7 +15,9 @@ class VerificationMenuVCModel: LinkModel  {
     let sections: [S] = [S(title: "画面遷移", cells:
                             [C(title: "ナビゲーション遷移テスト", actionId: .navigationTestTransition)]),
                          S(title: "WebAPI", cells:
-                            [C(title: "WebAPI呼び出しテスト", actionId: .webApiCallingTestTransition)])]
+                            [C(title: "WebAPI呼び出しテスト", actionId: .webApiCallingTestTransition)]),
+                         S(title: "テーブルビュー", cells:
+                            [C(title: "一部のセルの更新", actionId: .tableViewCellTest1Transition)])]
     
     override func receiveAction(_ action: ActionFromView, params: [String:Any]) {
         super.receiveAction(action, params: params)
@@ -38,6 +40,11 @@ class VerificationMenuVCModel: LinkModel  {
             case .webApiCallingTestTransition:
                 sendAction(.parentAction(.pushNavigation),
                            params: ["vc_index": VCStructureIndex.webApiCallingTestView,
+                                    "input_params": ["previous_vc_index_path":indexPath,
+                                                     "pushed_navigation":true]])
+            case .tableViewCellTest1Transition:
+                sendAction(.parentAction(.pushNavigation),
+                           params: ["vc_index": VCStructureIndex.tableViewCellTest1View,
                                     "input_params": ["previous_vc_index_path":indexPath,
                                                      "pushed_navigation":true]])
             }

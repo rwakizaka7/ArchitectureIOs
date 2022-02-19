@@ -14,10 +14,7 @@ typealias ModalTransitionStyle = UIModalTransitionStyle
 typealias AlertStyle = UIAlertController.Style
 typealias AlertActionStyle = UIAlertAction.Style
 
-enum VerificationMenuVCActionId {
-    case navigationTestTransition
-    case webApiCallingTestTransition
-}
+// VerificationMenuViewController
 
 struct VerificationMenuVCMenuTableSection {
     var title: String!
@@ -29,16 +26,13 @@ struct VerificationMenuVCMenuTableCell {
     var actionId: VerificationMenuVCActionId!
 }
 
-enum NavigationTestMenuVCMenuVCActionId {
-    case parentPopNavigation
-    case pushNavigation
-    case pushNavigationTabBar
-    case popNavigation
-    case presentPageSheet
-    case presentOverFullScreen
-    case dismiss
-    case replaceRootViewController
+enum VerificationMenuVCActionId {
+    case navigationTestTransition
+    case webApiCallingTestTransition
+    case tableViewCellTest1Transition
 }
+
+// WebApiCallingTestViewController
 
 struct WebApiCallingTestVCMenuTableSection {
     var title: String!
@@ -54,6 +48,8 @@ enum WebApiCallingTestVCMenuVCActionId {
     case api1Calling
 }
 
+// NavigationTestMenuViewController
+
 struct NavigationTestMenuVCMenuTableSection {
     var title: String!
     var cells: [NavigationTestMenuVCMenuTableCell] = []
@@ -62,4 +58,30 @@ struct NavigationTestMenuVCMenuTableSection {
 struct NavigationTestMenuVCMenuTableCell {
     var title: String!
     var actionId: NavigationTestMenuVCMenuVCActionId!
+}
+
+enum NavigationTestMenuVCMenuVCActionId {
+    case parentPopNavigation
+    case pushNavigation
+    case pushNavigationTabBar
+    case popNavigation
+    case presentPageSheet
+    case presentOverFullScreen
+    case dismiss
+    case replaceRootViewController
+}
+
+// TableViewCellTest1ViewController
+
+enum TableViewCellTest1VCMenuVCActionId {
+    case action1
+}
+
+struct TableViewCellTest1VCMenuTableSection {
+    var title: String!
+    var cells: [TableViewCellTest1VCMenuTableCell] = []
+}
+
+struct TableViewCellTest1VCMenuTableCell {
+    var title: String!
 }
