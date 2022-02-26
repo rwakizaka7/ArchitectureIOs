@@ -147,7 +147,7 @@ class NavigationTestMenuViewController: LinkViewController<NavigationTestMenuVCM
         size.width = floor(width / CGFloat(colCount))
         let widthRemainder = Int(width) % colCount
         let colIdx = indexPath.item % colCount
-        if colIdx < widthRemainder {
+        if colIdx < widthRemainder - 1 {
             size.width = size.width + 1
         }
         size.height = floor(size.width * 100 / 144)
