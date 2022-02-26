@@ -49,6 +49,19 @@ class TableViewCellTest1ViewController: LinkViewController<TableViewCellTest1VCM
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if let frame = navigationController?.navigationBar.bounds {
+            let searchBar = { () -> UISearchBar in
+                let searchBar = UISearchBar(frame: frame)
+                searchBar.placeholder = "タイトルで探す"
+                searchBar.tintColor = UIColor.gray
+                searchBar.keyboardType = UIKeyboardType.default
+                return searchBar
+            }()
+            
+            navigationItem.titleView = searchBar
+            navigationItem.titleView?.frame = frame
+        }
+        
         tableView.delegate = self
         tableView.dataSource = self
     }

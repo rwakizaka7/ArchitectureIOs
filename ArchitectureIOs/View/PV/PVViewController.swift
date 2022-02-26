@@ -23,6 +23,7 @@ extension PVViewController {
         let ns = vCIndex.navigationStructure
         navigationController?.setNavigationBarHidden(ns.hidden, animated: true)
         navigationItem.title = ns.title
+        navigationItem.backButtonDisplayMode = .generic
     }
     
     // viewDidAppear
