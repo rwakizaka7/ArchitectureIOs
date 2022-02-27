@@ -11,11 +11,11 @@ import UIKit
 class TableView: UITableView {
     override func touchesShouldCancel(in view: UIView) -> Bool {
         if view is UIButton {
-//            if let cornerView = ViewUtils.getParentTableViewCell(view: view)
+//            if let cell = ViewUtils.getParentTableViewCell(view: view)
 //                as? PVCellCornerViewHighlight {
-//                cornerView.updateBackground(highlighted: false, animated: false)
+//                cell.updateBackground(highlighted: false, animated: false)
 //            }
-            
+
             return true
         }
         return super.touchesShouldCancel(in: view)

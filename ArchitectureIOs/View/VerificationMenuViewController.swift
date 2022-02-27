@@ -17,38 +17,38 @@ class VerificationMenuVCMenuTableViewCell: TableViewCell<VerificationMenuViewCon
     @IBOutlet weak var _textLabel: UILabel!
     
     @IBAction func touchDown(_ sender: Any) {
-        guard let button = sender as? UIButton else {
-            return
-        }
-        
-        switch button {
-        case cornerViewButton:
-            updateBackground(highlighted: true, animated: false)
-            vc.selectionIndexPath = indexPath
-        default:
-            break
-        }
+//        guard let button = sender as? UIButton else {
+//            return
+//        }
+//
+//        switch button {
+//        case cornerViewButton:
+//            updateBackground(highlighted: true, animated: false)
+//            vc.selectionIndexPath = indexPath
+//        default:
+//            break
+//        }
     }
     
     @IBAction func touchUpInside(_ sender: Any) {
-        guard let button = sender as? UIButton else {
-            return
-        }
-        
-        switch button {
-        case cornerViewButton:
-            vc.tableView(tableView, didSelectRowItemAt: indexPath)
-        default:
-            break
-        }
+//        guard let button = sender as? UIButton else {
+//            return
+//        }
+//
+//        switch button {
+//        case cornerViewButton:
+//            vc.tableView(tableView, didSelectRowItemAt: indexPath)
+//        default:
+//            break
+//        }
     }
     
     override func setHighlighted(_ highlighted: Bool, animated: Bool) {
-        //updateBackground(highlighted: highlighted, animated: animated)
+        updateBackground(highlighted: highlighted, animated: animated)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
-        //updateBackground(highlighted: selected, animated: animated)
+        updateBackground(highlighted: selected, animated: animated)
     }
 }
 
@@ -88,7 +88,7 @@ class VerificationMenuViewController: LinkViewController<VerificationMenuVCModel
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         super.scrollViewDidScroll(scrollView)
 
-        unselectCell(animated: false)
+        //unselectCell(animated: false)
     }
     
     func unselectCell(animated: Bool = true) {
@@ -102,6 +102,9 @@ class VerificationMenuViewController: LinkViewController<VerificationMenuVCModel
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        super.tableView(tableView, didSelectRowAt: indexPath)
+        
+        selectionIndexPath = indexPath
     }
     
     func tableView(_ tableView: UITableView, didSelectRowItemAt indexPath: IndexPath) {
