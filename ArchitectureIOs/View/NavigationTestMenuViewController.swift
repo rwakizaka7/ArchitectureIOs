@@ -53,7 +53,7 @@ class NavigationTestMenuViewController: LinkViewController<NavigationTestMenuVCM
     let lastSectionFooterHeight: CGFloat = 45
     let sectionInsetsOnHorizontalAxis: CGFloat = 16
     let menuCollectionViewColNum = 3
-    let cellPadding: CGFloat = 3
+    let cellPadding: CGFloat = 8
     
     override func receiveAction(_ action: ActionFromModel, params: [String : Any]) {
         super.receiveAction(action, params: params)
