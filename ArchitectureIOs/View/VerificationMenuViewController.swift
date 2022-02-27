@@ -9,16 +9,46 @@
 import Foundation
 import UIKit
 
-class VerificationMenuVCMenuTableViewCell: UITableViewCell, PVCellCornerViewHighlight {
+class VerificationMenuVCMenuTableViewCell: TableViewCell<VerificationMenuViewController>,
+    PVCellCornerViewHighlight {
+    
+    @IBOutlet weak var cornerViewButton: UIButton!
     @IBOutlet weak var cornerView: UIView!
     @IBOutlet weak var _textLabel: UILabel!
     
+    @IBAction func touchDown(_ sender: Any) {
+        guard let button = sender as? UIButton else {
+            return
+        }
+        
+        switch button {
+        case cornerViewButton:
+            updateBackground(highlighted: true, animated: false)
+            vc.selectionIndexPath = indexPath
+        default:
+            break
+        }
+    }
+    
+    @IBAction func touchUpInside(_ sender: Any) {
+        guard let button = sender as? UIButton else {
+            return
+        }
+        
+        switch button {
+        case cornerViewButton:
+            vc.tableView(tableView, didSelectRowItemAt: indexPath)
+        default:
+            break
+        }
+    }
+    
     override func setHighlighted(_ highlighted: Bool, animated: Bool) {
-        updateBackground(highlighted: highlighted, animated: animated)
+        //updateBackground(highlighted: highlighted, animated: animated)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
-        updateBackground(highlighted: selected, animated: animated)
+        //updateBackground(highlighted: selected, animated: animated)
     }
 }
 
@@ -52,16 +82,30 @@ class VerificationMenuViewController: LinkViewController<VerificationMenuVCModel
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        unselectCell()
+    }
+    
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        super.scrollViewDidScroll(scrollView)
+
+        unselectCell(animated: false)
+    }
+    
+    func unselectCell(animated: Bool = true) {
         if let indexPath = selectionIndexPath {
             selectionIndexPath = nil
-            menuTableView.deselectRow(at: indexPath, animated: true)
+            let cell = menuTableView.cellForRow(at: indexPath)
+                as! VerificationMenuVCMenuTableViewCell
+            cell.updateBackground(highlighted: false, animated: animated)
+            //menuTableView.deselectRow(at: indexPath, animated: true)
         }
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowItemAt indexPath: IndexPath) {
         super.tableView(tableView, didSelectRowAt: indexPath)
-        
-        selectionIndexPath = indexPath
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -95,6 +139,7 @@ class VerificationMenuViewController: LinkViewController<VerificationMenuVCModel
         let cell = tableView.dequeueReusableCell(
             withIdentifier: "VerificationMenuVCMenuTableViewCell", for: indexPath)
             as! VerificationMenuVCMenuTableViewCell
+        cell.cornerViewButton.setTitle("", for: .normal)
         cell._textLabel?.text = sections[indexPath.section].cells[indexPath.row].title
         return cell
     }

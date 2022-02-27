@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		31F16C37D5345AE107B0DB9B /* Pods_ArchitectureIOs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADCA034A6EF05B6465BF5555 /* Pods_ArchitectureIOs.framework */; };
+		9E32CDB627CB1462008FBD0D /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E32CDB527CB1462008FBD0D /* TableViewCell.swift */; };
+		9E32CDB827CB38A0008FBD0D /* TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E32CDB727CB38A0008FBD0D /* TableView.swift */; };
+		9E475A7C27CB76ED006E29D8 /* ViewUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E475A7B27CB76ED006E29D8 /* ViewUtils.swift */; };
 		9E52BA6227C122150025942F /* TableViewCellTest1ViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E52BA6127C122150025942F /* TableViewCellTest1ViewController.storyboard */; };
 		9E52BA6427C129210025942F /* TableViewCellTest1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E52BA6327C129210025942F /* TableViewCellTest1ViewController.swift */; };
 		9E52BA6627C148FF0025942F /* TableViewCellTest1VCModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E52BA6527C148FF0025942F /* TableViewCellTest1VCModel.swift */; };
@@ -53,6 +56,9 @@
 /* Begin PBXFileReference section */
 		0FFAC16F2C6A8D9022E4EAE1 /* Pods-ArchitectureIOs.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArchitectureIOs.debug.xcconfig"; path = "Target Support Files/Pods-ArchitectureIOs/Pods-ArchitectureIOs.debug.xcconfig"; sourceTree = "<group>"; };
 		6601795CEFB0D63D1EE6AA5C /* Pods-ArchitectureIOs.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArchitectureIOs.release.xcconfig"; path = "Target Support Files/Pods-ArchitectureIOs/Pods-ArchitectureIOs.release.xcconfig"; sourceTree = "<group>"; };
+		9E32CDB527CB1462008FBD0D /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		9E32CDB727CB38A0008FBD0D /* TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableView.swift; sourceTree = "<group>"; };
+		9E475A7B27CB76ED006E29D8 /* ViewUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewUtils.swift; sourceTree = "<group>"; };
 		9E52BA6127C122150025942F /* TableViewCellTest1ViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TableViewCellTest1ViewController.storyboard; sourceTree = "<group>"; };
 		9E52BA6327C129210025942F /* TableViewCellTest1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellTest1ViewController.swift; sourceTree = "<group>"; };
 		9E52BA6527C148FF0025942F /* TableViewCellTest1VCModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellTest1VCModel.swift; sourceTree = "<group>"; };
@@ -159,6 +165,7 @@
 				CFCE54202653D7CE009C947F /* Types.swift */,
 				CFCE53ED2653D73B009C947F /* AppDelegate.swift */,
 				CFCE53EF2653D73B009C947F /* SceneDelegate.swift */,
+				9E475A7B27CB76ED006E29D8 /* ViewUtils.swift */,
 				CFCE53F62653D73C009C947F /* Assets.xcassets */,
 				CFCE53FB2653D73C009C947F /* Info.plist */,
 			);
@@ -210,6 +217,8 @@
 				CFCE54132653D7CE009C947F /* BaseNavigationController.swift */,
 				CFCE540E2653D7CE009C947F /* BaseTabBarController.swift */,
 				CFCE540F2653D7CE009C947F /* BaseViewController.swift */,
+				9E32CDB727CB38A0008FBD0D /* TableView.swift */,
+				9E32CDB527CB1462008FBD0D /* TableViewCell.swift */,
 				CFCE54122653D7CE009C947F /* LinkNavigationController.swift */,
 				CFCE54102653D7CE009C947F /* LinkTabBarController.swift */,
 				CFCE54112653D7CE009C947F /* LinkViewController.swift */,
@@ -388,10 +397,12 @@
 			files = (
 				CF3202F326663D6600D20461 /* PVLinkable.swift in Sources */,
 				CF740E43279008A50087D47A /* WebApiCallingTestViewController.swift in Sources */,
+				9E475A7C27CB76ED006E29D8 /* ViewUtils.swift in Sources */,
 				CFCE543B2653D7CE009C947F /* BaseModel.swift in Sources */,
 				CFCE542D2653D7CE009C947F /* PVCellCornerViewHighlight.swift in Sources */,
 				CFCE542E2653D7CE009C947F /* PVViewController.swift in Sources */,
 				CF089DC5265A742E00A6AAFB /* VerificationMenuVCModel.swift in Sources */,
+				9E32CDB627CB1462008FBD0D /* TableViewCell.swift in Sources */,
 				CF740E452790096D0087D47A /* WebApiCallingTestVCModel.swift in Sources */,
 				CFCE54382653D7CE009C947F /* TabBarController.swift in Sources */,
 				9E52BA6427C129210025942F /* TableViewCellTest1ViewController.swift in Sources */,
@@ -414,6 +425,7 @@
 				CFCE54422653D7CE009C947F /* EKEventStoreRepository.swift in Sources */,
 				CF089DC1265A73D500A6AAFB /* VerificationMenuViewController.swift in Sources */,
 				CF089DC2265A73D500A6AAFB /* NavigationTestMenuViewController.swift in Sources */,
+				9E32CDB827CB38A0008FBD0D /* TableView.swift in Sources */,
 				CF740EA1279163580087D47A /* AlamofireRepository.swift in Sources */,
 				CFCE54332653D7CE009C947F /* LinkNavigationController.swift in Sources */,
 				CFCE543D2653D7CE009C947F /* TabBarControllerModel.swift in Sources */,
