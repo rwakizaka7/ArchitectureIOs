@@ -57,6 +57,9 @@ class VerificationMenuViewController: LinkViewController<VerificationMenuVCModel
     
     @IBOutlet weak var menuTableView: UITableView!
     
+    // move to model
+    var firstViewDidAppear = true
+    
     var sections: [S] = []
     
     var selectionIndexPath: IndexPath!
@@ -83,12 +86,16 @@ class VerificationMenuViewController: LinkViewController<VerificationMenuVCModel
         super.viewDidAppear(animated)
         
         unselectCell()
+        
+        firstViewDidAppear = false
     }
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         super.scrollViewDidScroll(scrollView)
 
-        unselectCell(animated: false)
+        if !firstViewDidAppear {
+            unselectCell(animated: false)
+        }
     }
     
     func unselectCell(animated: Bool = true) {
@@ -105,6 +112,8 @@ class VerificationMenuViewController: LinkViewController<VerificationMenuVCModel
     }
     
     func tableView(_ tableView: UITableView, didSelectRowItemAt indexPath: IndexPath) {
+        firstViewDidAppear = true
+        
         super.tableView(tableView, didSelectRowAt: indexPath)
     }
     
@@ -139,7 +148,6 @@ class VerificationMenuViewController: LinkViewController<VerificationMenuVCModel
         let cell = tableView.dequeueReusableCell(
             withIdentifier: "VerificationMenuVCMenuTableViewCell", for: indexPath)
             as! VerificationMenuVCMenuTableViewCell
-        cell.cornerViewButton.setTitle("", for: .normal)
         cell._textLabel?.text = sections[indexPath.section].cells[indexPath.row].title
         return cell
     }

@@ -13,6 +13,137 @@ class BaseViewController: UIViewController, PVViewController {
     var vCIndex: VCStructureIndex!
     var modalPresenting = false
     
+    var keyboardUpping = false
+    var keyboardFrame: CGRect!
+    
+    lazy var tapGestureViews: [UIView] = [self.view]
+    var tapGestureRecognizers: [UIView: UITapGestureRecognizer] = [:]
+    
+    var panGestureViews: [UIView] = []
+    var panGestureRecognizers: [UIView: UIPanGestureRecognizer] = [:]
+    
+    var textFields: [UITextField] { [] }
+    var testFieldShouldChangeCharacters: [UITextField: (String) -> Bool] { [:] }
+    var textFieldFocusChangeList: [UITextField] { [] }
+    
+    lazy var subscriptions: [String: (viewWillAppear: ()->(),
+                                      viewWillDisappear: ()->())] = [
+        "tap_gesture_recognizer": ({
+            [weak self] in
+            guard let self = self else {
+                return
+            }
+
+            self.tapGestureRecognizers = self.tapGestureViews.reduce(
+                into: [UIView:UITapGestureRecognizer]()) {
+                tapGestureRecognizers, view in
+                
+                let gesture = UITapGestureRecognizer(
+                target: self, action: #selector(self.tapGestureRecognizer(_:)))
+                gesture.cancelsTouchesInView = false
+                view.addGestureRecognizer(gesture)
+                tapGestureRecognizers[view] = gesture
+            }
+        }, {
+            [weak self] in
+            guard let self = self else {
+                return
+            }
+            
+            self.tapGestureRecognizers.forEach {
+                tapGestureRecognizer in
+                tapGestureRecognizer.key.removeGestureRecognizer(tapGestureRecognizer.value)
+            }
+        }),
+        "pan_gesture_recognizer": ({
+            [weak self] in
+            guard let self = self else {
+                return
+            }
+
+            self.panGestureRecognizers = self.panGestureViews.reduce(
+                into: [UIView:UIPanGestureRecognizer]()) {
+                panGestureRecognizers, view in
+                
+                let gesture = UIPanGestureRecognizer(
+                target: self, action: #selector(self.panGestureRecognizer(_:)))
+                gesture.delegate = self
+                gesture.cancelsTouchesInView = false
+                view.addGestureRecognizer(gesture)
+                panGestureRecognizers[view] = gesture
+            }
+        }, {
+            [weak self] in
+            guard let self = self else {
+                return
+            }
+            
+            self.panGestureRecognizers.forEach {
+                panGestureRecognizer in
+                panGestureRecognizer.key.removeGestureRecognizer(panGestureRecognizer.value)
+            }
+        }),
+        "keyboard_will_show": ({
+            [weak self] in
+            guard let self = self else {
+                return
+            }
+
+            NotificationCenter.default.addObserver(
+                self, selector: #selector(self.keyboardWillShow(_:)),
+                name: UIResponder.keyboardWillShowNotification, object: nil)
+        }, {
+            [weak self] in
+            guard let self = self else {
+                return
+            }
+            
+            NotificationCenter.default.removeObserver(
+                self, name: UIResponder.keyboardWillShowNotification,
+                object: nil)
+        }),
+        "keyboard_will_hide": ({
+            [weak self] in
+            guard let self = self else {
+                return
+            }
+
+            NotificationCenter.default.addObserver(
+                self, selector: #selector(self.keyboardWillHide(_:)),
+                name: UIResponder.keyboardWillHideNotification, object: nil)
+        }, {
+            [weak self] in
+            guard let self = self else {
+                return
+            }
+            
+            NotificationCenter.default.removeObserver(
+                self, name: UIResponder.keyboardWillHideNotification,
+                object: nil)
+        }),
+        "text_field_editing_changed": ({
+            [weak self] in
+            guard let self = self else {
+                return
+            }
+
+            self.textFields.forEach {
+                $0.addTarget(self, action: #selector(
+                    self.editingChanged(textField:)), for: .editingChanged)
+            }
+        }, {
+            [weak self] in
+            guard let self = self else {
+                return
+            }
+            
+            self.textFields.forEach {
+                $0.removeTarget(self, action: #selector(
+                    self.editingChanged(textField:)), for: .editingChanged)
+            }
+        }),
+    ]
+    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         print("init \(className)!!")
@@ -55,11 +186,70 @@ class BaseViewController: UIViewController, PVViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         sendAction(.viewWillDisappear)
+        
+        view.endEditing(true)
+        
+        subscriptions.values.forEach {
+            subscription in
+            subscription.viewWillDisappear()
+        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         sendAction(.viewDidDisappear)
+    }
+    
+    @objc func tapGestureRecognizer(_ sender: UITapGestureRecognizer) {
+        switch sender.view {
+        case view:
+            view.endEditing(true)
+        default:
+            break
+        }
+    }
+    
+    @objc func panGestureRecognizer(_ sender: UIPanGestureRecognizer) {
+        switch sender.view {
+        default:
+            break
+        }
+    }
+    
+    @objc func keyboardWillShow(_ notification: Notification) {
+        keyboardFrame = (notification.userInfo?[UIResponder
+            .keyboardFrameEndUserInfoKey] as AnyObject).cgRectValue!
+        
+        defer {
+            keyboardUpping = true
+        }
+        
+        guard let self = self as? PVScrollPositonAdjustable else {
+            return
+        }
+        
+        UIView.animate(withDuration: 0.25) {
+            self.scrollByKeyboardWillShow(keyboardFrame: self.keyboardFrame!)
+        }
+    }
+    
+    @objc func keyboardWillHide(_ notification: Notification) {
+        keyboardFrame = nil
+        
+        defer {
+            keyboardUpping = false
+        }
+        
+        guard let self = self as? PVScrollPositonAdjustable else {
+            return
+        }
+        
+        UIView.animate(withDuration: 0.5) {
+            self.scrollBykeyboardWillHide()
+        }
+    }
+    
+    @objc func editingChanged(textField: UITextField) {
     }
     
     func presentingCompletion() {}
@@ -75,6 +265,16 @@ class BaseViewController: UIViewController, PVViewController {
     
     func receiveAction(_ action: ActionFromModel, params: [String:Any]) {
         doAction(action, params: params)
+    }
+}
+
+extension BaseViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        if otherGestureRecognizer is UIPanGestureRecognizer && otherGestureRecognizer.view is UIScrollView {
+            return true
+        } else {
+            return false
+        }
     }
 }
 
@@ -97,6 +297,10 @@ extension BaseViewController: UIScrollViewDelegate {
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         sendActionWithScrollInfo(.scrollViewWillBeginDragging,
                                  scrollView: scrollView)
+        
+        if !(scrollView is UITextView) {
+            view.endEditing(true)
+        }
     }
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
@@ -152,5 +356,45 @@ extension BaseViewController: UICollectionViewDataSource {
             sendAction(.collectionViewDisplaying, scrollView: collectionView, indexPath: indexPath)
         }
         return UICollectionViewCell()
+    }
+}
+
+extension BaseViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn
+        range: NSRange, replacementString string: String) -> Bool {
+        let text: String = (textField.text! as NSString).replacingCharacters(
+            in: range, with: string)
+        
+        return testFieldShouldChangeCharacters[textField]?(text) ?? true
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        let i = textFieldFocusChangeList.enumerated()
+            .filter({ $1 == textField }).first?.offset
+        if let i = i, i != textFieldFocusChangeList.count - 1 {
+            textFieldFocusChangeList[i + 1].becomeFirstResponder()
+        } else {
+            textField.resignFirstResponder()
+        }
+        
+        return true
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        guard let self = self as? PVScrollPositonAdjustable,
+              let keyboardFrame = keyboardFrame else {
+            return
+        }
+        
+        UIView.animate(withDuration: 0.25) {
+            self.scrollByKeyboardWillShow(keyboardFrame: keyboardFrame)
+        }
+    }
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        return true
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
     }
 }
