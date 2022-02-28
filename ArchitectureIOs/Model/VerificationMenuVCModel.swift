@@ -19,12 +19,21 @@ class VerificationMenuVCModel: LinkModel  {
                          S(title: "テーブルビュー", cells:
                             [C(title: "一部のセルの更新", actionId: .tableViewCellTest1Transition)])]
     
+    var firstViewDidAppear = true
+    
     override func receiveAction(_ action: ActionFromView, params: [String:Any]) {
         super.receiveAction(action, params: params)
         
         switch action {
         case .viewDidLoad:
             sendAction(.dataSetting, params: ["sections":sections])
+        case .viewDidAppear:
+            sendAction(.viewResetting, params: ["animated":true])
+            firstViewDidAppear = false
+        case .scrollViewDidScroll:
+            if !firstViewDidAppear {
+                sendAction(.viewResetting, params: ["animated":false])
+            }
         case .tableViewSelection:
             guard let indexPath = params["index_path"] as? IndexPath,
                   let actionId = sections[indexPath.section].cells[indexPath.row].actionId else {
@@ -33,16 +42,19 @@ class VerificationMenuVCModel: LinkModel  {
             
             switch actionId {
             case .navigationTestTransition:
+                firstViewDidAppear = true
                 sendAction(.parentAction(.pushNavigation),
                            params: ["vc_index": VCStructureIndex.navigationTestMenuView,
                                     "input_params": ["previous_vc_index_path":indexPath,
                                                      "pushed_navigation":true]])
             case .webApiCallingTestTransition:
+                firstViewDidAppear = true
                 sendAction(.parentAction(.pushNavigation),
                            params: ["vc_index": VCStructureIndex.webApiCallingTestView,
                                     "input_params": ["previous_vc_index_path":indexPath,
                                                      "pushed_navigation":true]])
             case .tableViewCellTest1Transition:
+                firstViewDidAppear = true
                 sendAction(.parentAction(.pushNavigation),
                            params: ["vc_index": VCStructureIndex.tableViewCellTest1View,
                                     "input_params": ["previous_vc_index_path":indexPath,

@@ -57,9 +57,6 @@ class VerificationMenuViewController: LinkViewController<VerificationMenuVCModel
     
     @IBOutlet weak var menuTableView: UITableView!
     
-    // move to model
-    var firstViewDidAppear = true
-    
     var sections: [S] = []
     
     var selectionIndexPath: IndexPath!
@@ -70,6 +67,16 @@ class VerificationMenuViewController: LinkViewController<VerificationMenuVCModel
         switch action {
         case .dataSetting:
             sections = params["sections"] as? [S] ?? []
+        case .viewResetting:
+            let animated = params["animated"] as? Bool ?? false
+            
+            if let indexPath = selectionIndexPath {
+                selectionIndexPath = nil
+                let cell = menuTableView.cellForRow(at: indexPath)
+                    as! VerificationMenuVCMenuTableViewCell
+                cell.updateBackground(highlighted: false, animated: animated)
+                //menuTableView.deselectRow(at: indexPath, animated: true)
+            }
         default:
             break
         }
@@ -82,38 +89,10 @@ class VerificationMenuViewController: LinkViewController<VerificationMenuVCModel
         menuTableView.dataSource = self
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        unselectCell()
-        
-        firstViewDidAppear = false
-    }
-    
-    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        super.scrollViewDidScroll(scrollView)
-
-        if !firstViewDidAppear {
-            unselectCell(animated: false)
-        }
-    }
-    
-    func unselectCell(animated: Bool = true) {
-        if let indexPath = selectionIndexPath {
-            selectionIndexPath = nil
-            let cell = menuTableView.cellForRow(at: indexPath)
-                as! VerificationMenuVCMenuTableViewCell
-            cell.updateBackground(highlighted: false, animated: animated)
-            //menuTableView.deselectRow(at: indexPath, animated: true)
-        }
-    }
-    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowItemAt indexPath: IndexPath) {
-        firstViewDidAppear = true
-        
         super.tableView(tableView, didSelectRowAt: indexPath)
     }
     
