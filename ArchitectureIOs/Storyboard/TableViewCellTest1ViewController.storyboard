@@ -17,11 +17,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="K9f-fT-hrK">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="K9f-fT-hrK" customClass="TableView" customModule="ArchitectureIOs" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TableViewCellTest1VCApiTableViewCell" id="ZPR-K5-Pqm" customClass="TableViewCellTest1VCApiTableViewCell" customModule="ArchitectureIOs" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TableViewCellTest1VCFilteringTableViewCell" id="ZPR-K5-Pqm" customClass="TableViewCellTest1VCFilteringTableViewCell" customModule="ArchitectureIOs" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="49.5" width="414" height="74"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ZPR-K5-Pqm" id="sK8-T3-QL2">
@@ -31,6 +31,14 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L4G-JB-Y6c">
                                                     <rect key="frame" x="16" y="6" width="382" height="62"/>
                                                     <subviews>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ruA-Op-fTz">
+                                                            <rect key="frame" x="0.0" y="0.0" width="382" height="62"/>
+                                                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                            <connections>
+                                                                <action selector="touchDown:" destination="ZPR-K5-Pqm" eventType="touchDown" id="Bm5-EJ-cfo"/>
+                                                                <action selector="touchUpInside:" destination="ZPR-K5-Pqm" eventType="touchUpInside" id="6DN-7d-CNi"/>
+                                                            </connections>
+                                                        </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mac OS X Public Beta (Siam)" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uSk-L8-Kyt">
                                                             <rect key="frame" x="16" y="16" width="350" height="30"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -42,9 +50,13 @@
                                                     <constraints>
                                                         <constraint firstItem="uSk-L8-Kyt" firstAttribute="top" secondItem="L4G-JB-Y6c" secondAttribute="top" constant="16" id="B8u-Yn-0Ym"/>
                                                         <constraint firstAttribute="bottom" secondItem="uSk-L8-Kyt" secondAttribute="bottom" constant="16" id="Ilb-rn-FQB"/>
+                                                        <constraint firstItem="ruA-Op-fTz" firstAttribute="top" secondItem="L4G-JB-Y6c" secondAttribute="top" id="KMA-93-bjZ"/>
+                                                        <constraint firstAttribute="bottom" secondItem="ruA-Op-fTz" secondAttribute="bottom" id="OEv-jl-cCa"/>
                                                         <constraint firstAttribute="trailing" secondItem="uSk-L8-Kyt" secondAttribute="trailing" constant="16" id="SDf-JW-RAf"/>
                                                         <constraint firstItem="uSk-L8-Kyt" firstAttribute="leading" secondItem="L4G-JB-Y6c" secondAttribute="leading" constant="16" id="UpD-pe-vw1"/>
                                                         <constraint firstAttribute="height" constant="62" id="atU-We-pTk"/>
+                                                        <constraint firstAttribute="trailing" secondItem="ruA-Op-fTz" secondAttribute="trailing" id="gWS-z8-xxb"/>
+                                                        <constraint firstItem="ruA-Op-fTz" firstAttribute="leading" secondItem="L4G-JB-Y6c" secondAttribute="leading" id="k3b-nM-mVr"/>
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -63,6 +75,7 @@
                                         <connections>
                                             <outlet property="_textLabel" destination="uSk-L8-Kyt" id="TYd-gd-Amy"/>
                                             <outlet property="cornerView" destination="L4G-JB-Y6c" id="QEF-hd-9qB"/>
+                                            <outlet property="cornerViewButton" destination="ruA-Op-fTz" id="4vx-cV-0dy"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -79,7 +92,7 @@
                     </view>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
-                        <outlet property="tableView" destination="K9f-fT-hrK" id="cjh-ep-8lh"/>
+                        <outlet property="filteringTableView" destination="K9f-fT-hrK" id="cjh-ep-8lh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

@@ -57,7 +57,6 @@ indirect enum ActionFromModel: Hashable {
     case dataSetting
     case viewResetting
     case reloadData
-    case cellUnselection
     case calendarFunc(CalendarFunctionActionFromModel)
 }
 

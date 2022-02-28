@@ -8,23 +8,53 @@
 import Foundation
 import UIKit
 
-class TableViewCellTest1VCApiTableViewCell: UITableViewCell, PVCellCornerViewHighlight {
+class TableViewCellTest1VCFilteringTableViewCell:
+    TableViewCell<TableViewCellTest1ViewController>,
+    PVCellCornerViewHighlight {
+    
+    @IBOutlet weak var cornerViewButton: UIButton!
     @IBOutlet weak var cornerView: UIView!
     @IBOutlet weak var _textLabel: UILabel!
     
+    @IBAction func touchDown(_ sender: Any) {
+        guard let button = sender as? UIButton else {
+            return
+        }
+        
+        switch button {
+        case cornerViewButton:
+            updateBackground(highlighted: true, animated: false)
+            vc.selectionIndexPath = indexPath
+        default:
+            break
+        }
+    }
+    
+    @IBAction func touchUpInside(_ sender: Any) {
+        guard let button = sender as? UIButton else {
+            return
+        }
+        
+        switch button {
+        case cornerViewButton:
+            vc.tableView(tableView, didSelectRowItemAt: indexPath)
+            updateBackground(highlighted: false, animated: true)
+        default:
+            break
+        }
+    }
+    
     override func setHighlighted(_ highlighted: Bool, animated: Bool) {
-        updateBackground(highlighted: highlighted, animated: animated)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
-        updateBackground(highlighted: selected, animated: animated)
     }
 }
 
 class TableViewCellTest1ViewController: LinkViewController<TableViewCellTest1VCModel> {
     typealias S = TableViewCellTest1VCMenuTableSection
     
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var filteringTableView: UITableView!
     
     var sections: [S] = []
     
@@ -36,10 +66,14 @@ class TableViewCellTest1ViewController: LinkViewController<TableViewCellTest1VCM
         switch action {
         case .dataSetting:
             sections = params["sections"] as? [S] ?? []
-        case .cellUnselection:
+        case .viewResetting:
+            let animated = params["animated"] as? Bool ?? false
+            
             if let indexPath = selectionIndexPath {
                 selectionIndexPath = nil
-                tableView.deselectRow(at: indexPath, animated: true)
+                let cell = filteringTableView.cellForRow(at: indexPath)
+                    as! TableViewCellTest1VCFilteringTableViewCell
+                cell.updateBackground(highlighted: false, animated: animated)
             }
         default:
             break
@@ -62,8 +96,8 @@ class TableViewCellTest1ViewController: LinkViewController<TableViewCellTest1VCM
             navigationItem.titleView?.frame = frame
         }
         
-        tableView.delegate = self
-        tableView.dataSource = self
+        filteringTableView.delegate = self
+        filteringTableView.dataSource = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -71,12 +105,14 @@ class TableViewCellTest1ViewController: LinkViewController<TableViewCellTest1VCM
         
         if let indexPath = selectionIndexPath {
             selectionIndexPath = nil
-            tableView.deselectRow(at: indexPath, animated: true)
+            filteringTableView.deselectRow(at: indexPath, animated: true)
         }
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectionIndexPath = indexPath
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowItemAt indexPath: IndexPath) {
         super.tableView(tableView, didSelectRowAt: indexPath)
     }
     
@@ -109,8 +145,8 @@ class TableViewCellTest1ViewController: LinkViewController<TableViewCellTest1VCM
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(
-            withIdentifier: "TableViewCellTest1VCApiTableViewCell", for: indexPath)
-            as! TableViewCellTest1VCApiTableViewCell
+            withIdentifier: "TableViewCellTest1VCFilteringTableViewCell", for: indexPath)
+            as! TableViewCellTest1VCFilteringTableViewCell
         cell._textLabel?.text = sections[indexPath.section].cells[indexPath.row].title
         return cell
     }

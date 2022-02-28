@@ -9,6 +9,8 @@
 import Foundation
 
 class BaseModel: NSObject, EClass {
+    var firstViewDidAppear = true
+    
     required override init() {
         super.init()
         print("init \(className)!!")
@@ -25,6 +27,13 @@ class BaseModel: NSObject, EClass {
         switch action {
         case .selfAction(let action):
             sendAction(action, params: params)
+        case .viewDidAppear:
+            sendAction(.viewResetting, params: ["animated":true])
+            firstViewDidAppear = false
+        case .scrollViewDidScroll:
+            if !firstViewDidAppear {
+                sendAction(.viewResetting, params: ["animated":false])
+            }
         default:
             break
         }

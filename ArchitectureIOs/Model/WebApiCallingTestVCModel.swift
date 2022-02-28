@@ -92,7 +92,8 @@ class WebApiCallingTestVCModel: LinkModel {
             
             switch messageBoxId {
             case "api1_response":
-                sendAction(.cellUnselection)
+//                sendAction(.cellUnselection)
+                break
             default:
                 break
             }

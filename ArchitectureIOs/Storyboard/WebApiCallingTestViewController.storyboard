@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="hxs-Zb-rqV">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="hxs-Zb-rqV" customClass="TableView" customModule="ArchitectureIOs" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
@@ -31,6 +31,14 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8RV-5j-MeS">
                                                     <rect key="frame" x="16" y="6" width="382" height="62"/>
                                                     <subviews>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XVA-wM-Xc7">
+                                                            <rect key="frame" x="0.0" y="0.0" width="382" height="62"/>
+                                                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                            <connections>
+                                                                <action selector="touchDown:" destination="Ibe-w4-XJI" eventType="touchDown" id="Fph-Y6-6ua"/>
+                                                                <action selector="touchUpInside:" destination="Ibe-w4-XJI" eventType="touchUpInside" id="OdZ-4C-mSt"/>
+                                                            </connections>
+                                                        </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ナビゲーション遷移テスト" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Vb-sX-42j">
                                                             <rect key="frame" x="16" y="16" width="350" height="30"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -40,11 +48,15 @@
                                                     </subviews>
                                                     <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                                                     <constraints>
+                                                        <constraint firstAttribute="bottom" secondItem="XVA-wM-Xc7" secondAttribute="bottom" id="0cB-N9-lud"/>
                                                         <constraint firstAttribute="trailing" secondItem="1Vb-sX-42j" secondAttribute="trailing" constant="16" id="1HU-xh-C3e"/>
                                                         <constraint firstAttribute="height" constant="62" id="Ll2-7a-Usz"/>
+                                                        <constraint firstItem="XVA-wM-Xc7" firstAttribute="top" secondItem="8RV-5j-MeS" secondAttribute="top" id="cNI-jm-ScJ"/>
                                                         <constraint firstItem="1Vb-sX-42j" firstAttribute="leading" secondItem="8RV-5j-MeS" secondAttribute="leading" constant="16" id="e7G-rm-fak"/>
+                                                        <constraint firstAttribute="trailing" secondItem="XVA-wM-Xc7" secondAttribute="trailing" id="jVv-eP-MhD"/>
                                                         <constraint firstItem="1Vb-sX-42j" firstAttribute="top" secondItem="8RV-5j-MeS" secondAttribute="top" constant="16" id="nPt-OE-Exi"/>
                                                         <constraint firstAttribute="bottom" secondItem="1Vb-sX-42j" secondAttribute="bottom" constant="16" id="xSY-PT-AtT"/>
+                                                        <constraint firstItem="XVA-wM-Xc7" firstAttribute="leading" secondItem="8RV-5j-MeS" secondAttribute="leading" id="zee-3i-4Uy"/>
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -64,6 +76,7 @@
                                         <connections>
                                             <outlet property="_textLabel" destination="1Vb-sX-42j" id="JAP-aX-1Hz"/>
                                             <outlet property="cornerView" destination="8RV-5j-MeS" id="X4m-yY-Xc3"/>
+                                            <outlet property="cornerViewButton" destination="XVA-wM-Xc7" id="jiz-3U-e7K"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

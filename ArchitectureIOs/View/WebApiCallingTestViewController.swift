@@ -8,16 +8,46 @@
 import Foundation
 import UIKit
 
-class WebApiCallingTestVCApiTableViewCell: UITableViewCell, PVCellCornerViewHighlight {
+class WebApiCallingTestVCApiTableViewCell:
+    TableViewCell<WebApiCallingTestViewController>,
+    PVCellCornerViewHighlight {
+    
+    @IBOutlet weak var cornerViewButton: UIButton!
     @IBOutlet weak var cornerView: UIView!
     @IBOutlet weak var _textLabel: UILabel!
     
+    @IBAction func touchDown(_ sender: Any) {
+        guard let button = sender as? UIButton else {
+            return
+        }
+        
+        switch button {
+        case cornerViewButton:
+            updateBackground(highlighted: true, animated: false)
+            vc.selectionIndexPath = indexPath
+        default:
+            break
+        }
+    }
+    
+    @IBAction func touchUpInside(_ sender: Any) {
+        guard let button = sender as? UIButton else {
+            return
+        }
+        
+        switch button {
+        case cornerViewButton:
+            vc.tableView(tableView, didSelectRowItemAt: indexPath)
+            updateBackground(highlighted: false, animated: true)
+        default:
+            break
+        }
+    }
+    
     override func setHighlighted(_ highlighted: Bool, animated: Bool) {
-        updateBackground(highlighted: highlighted, animated: animated)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
-        updateBackground(highlighted: selected, animated: animated)
     }
 }
 
@@ -36,10 +66,14 @@ class WebApiCallingTestViewController: LinkViewController<WebApiCallingTestVCMod
         switch action {
         case .dataSetting:
             sections = params["sections"] as? [S] ?? []
-        case .cellUnselection:
+        case .viewResetting:
+            let animated = params["animated"] as? Bool ?? false
+            
             if let indexPath = selectionIndexPath {
                 selectionIndexPath = nil
-                apiTableView.deselectRow(at: indexPath, animated: true)
+                let cell = apiTableView.cellForRow(at: indexPath)
+                    as! WebApiCallingTestVCApiTableViewCell
+                cell.updateBackground(highlighted: false, animated: animated)
             }
         default:
             break
@@ -63,7 +97,9 @@ class WebApiCallingTestViewController: LinkViewController<WebApiCallingTestVCMod
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectionIndexPath = indexPath
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowItemAt indexPath: IndexPath) {
         super.tableView(tableView, didSelectRowAt: indexPath)
     }
     

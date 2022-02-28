@@ -19,21 +19,12 @@ class VerificationMenuVCModel: LinkModel  {
                          S(title: "テーブルビュー", cells:
                             [C(title: "一部のセルの更新", actionId: .tableViewCellTest1Transition)])]
     
-    var firstViewDidAppear = true
-    
     override func receiveAction(_ action: ActionFromView, params: [String:Any]) {
         super.receiveAction(action, params: params)
         
         switch action {
         case .viewDidLoad:
             sendAction(.dataSetting, params: ["sections":sections])
-        case .viewDidAppear:
-            sendAction(.viewResetting, params: ["animated":true])
-            firstViewDidAppear = false
-        case .scrollViewDidScroll:
-            if !firstViewDidAppear {
-                sendAction(.viewResetting, params: ["animated":false])
-            }
         case .tableViewSelection:
             guard let indexPath = params["index_path"] as? IndexPath,
                   let actionId = sections[indexPath.section].cells[indexPath.row].actionId else {
