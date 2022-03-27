@@ -28,12 +28,14 @@ class BaseModel: NSObject, EClass {
         case .selfAction(let action):
             sendAction(action, params: params)
         case .viewDidAppear:
-            sendAction(.viewResetting, params: ["animated":true])
+            sendAction(.selectionResetting, params: ["animated":true])
             firstViewDidAppear = false
         case .scrollViewDidScroll:
             if !firstViewDidAppear {
-                sendAction(.viewResetting, params: ["animated":false])
+                sendAction(.selectionResetting, params: ["animated":false])
             }
+        case .dismissalCompletion:
+            sendAction(.selectionResetting, params: ["animated":true])
         default:
             break
         }

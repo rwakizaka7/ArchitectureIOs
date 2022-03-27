@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -38,6 +38,14 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G7b-Ls-1Kx">
                                                     <rect key="frame" x="8" y="8" width="128" height="84"/>
                                                     <subviews>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7YN-Ph-gO3">
+                                                            <rect key="frame" x="0.0" y="0.0" width="128" height="84"/>
+                                                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                            <connections>
+                                                                <action selector="touchDown:" destination="vKT-MI-y8u" eventType="touchDown" id="NsI-li-CuA"/>
+                                                                <action selector="touchUpInside:" destination="vKT-MI-y8u" eventType="touchUpInside" id="ESc-pG-nLQ"/>
+                                                            </connections>
+                                                        </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PqF-xf-LT7">
                                                             <rect key="frame" x="8" y="8" width="112" height="68"/>
                                                             <attributedString key="attributedText">
@@ -53,12 +61,16 @@
                                                     </subviews>
                                                     <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                                                     <constraints>
+                                                        <constraint firstItem="7YN-Ph-gO3" firstAttribute="leading" secondItem="G7b-Ls-1Kx" secondAttribute="leading" id="5Oh-c8-mFf"/>
+                                                        <constraint firstItem="7YN-Ph-gO3" firstAttribute="top" secondItem="G7b-Ls-1Kx" secondAttribute="top" id="7rO-21-Pdd"/>
                                                         <constraint firstAttribute="height" constant="100" id="IaX-Vx-5rl"/>
+                                                        <constraint firstAttribute="trailing" secondItem="7YN-Ph-gO3" secondAttribute="trailing" id="d4f-pc-ewN"/>
                                                         <constraint firstAttribute="bottom" secondItem="PqF-xf-LT7" secondAttribute="bottom" constant="8" id="hkK-Ya-Xze"/>
                                                         <constraint firstAttribute="width" constant="144" id="jwp-5D-3P9"/>
                                                         <constraint firstItem="PqF-xf-LT7" firstAttribute="leading" secondItem="G7b-Ls-1Kx" secondAttribute="leading" constant="8" id="kEh-N5-ysk"/>
                                                         <constraint firstAttribute="trailing" secondItem="PqF-xf-LT7" secondAttribute="trailing" constant="8" id="nEU-4K-4Qx"/>
                                                         <constraint firstItem="PqF-xf-LT7" firstAttribute="top" secondItem="G7b-Ls-1Kx" secondAttribute="top" constant="8" id="pJe-bk-Uud"/>
+                                                        <constraint firstAttribute="bottom" secondItem="7YN-Ph-gO3" secondAttribute="bottom" id="sbs-dh-Vl3"/>
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -76,6 +88,7 @@
                                         </collectionViewCellContentView>
                                         <connections>
                                             <outlet property="cornerView" destination="G7b-Ls-1Kx" id="YBi-F7-iWA"/>
+                                            <outlet property="cornerViewButton" destination="7YN-Ph-gO3" id="c4L-k1-CW1"/>
                                             <outlet property="cornerViewHeightConstraint" destination="IaX-Vx-5rl" id="M3k-bd-Of4"/>
                                             <outlet property="cornerViewWidthConstraint" destination="jwp-5D-3P9" id="lX7-DO-3Ef"/>
                                             <outlet property="textLabel" destination="PqF-xf-LT7" id="Kj6-fX-e6N"/>

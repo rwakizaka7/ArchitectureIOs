@@ -12,8 +12,8 @@ import UIKit
 class VerificationMenuVCMenuTableViewCell: TableViewCell<VerificationMenuViewController>,
     PVCellCornerViewHighlight {
     
-    @IBOutlet weak var cornerViewButton: UIButton!
     @IBOutlet weak var cornerView: UIView!
+    @IBOutlet weak var cornerViewButton: UIButton!
     @IBOutlet weak var _textLabel: UILabel!
     
     @IBAction func touchDown(_ sender: Any) {
@@ -37,7 +37,7 @@ class VerificationMenuVCMenuTableViewCell: TableViewCell<VerificationMenuViewCon
         
         switch button {
         case cornerViewButton:
-            vc.tableView(tableView, didSelectRowItemAt: indexPath)
+            vc.tableView(tableView, didSelectItemOfRowAt: indexPath)
         default:
             break
         }
@@ -67,7 +67,7 @@ class VerificationMenuViewController: LinkViewController<VerificationMenuVCModel
         switch action {
         case .dataSetting:
             sections = params["sections"] as? [S] ?? []
-        case .viewResetting:
+        case .selectionResetting:
             let animated = params["animated"] as? Bool ?? false
             
             if let indexPath = selectionIndexPath {
@@ -92,7 +92,7 @@ class VerificationMenuViewController: LinkViewController<VerificationMenuVCModel
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowItemAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectItemOfRowAt indexPath: IndexPath) {
         super.tableView(tableView, didSelectRowAt: indexPath)
     }
     

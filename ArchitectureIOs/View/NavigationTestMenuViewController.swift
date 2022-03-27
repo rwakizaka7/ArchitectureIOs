@@ -13,31 +13,61 @@ class NavigationTestMenuVcMenuCollectionViewHeader: UICollectionReusableView {
     @IBOutlet weak var textLabel: UILabel!
 }
 
-class NavigationTestMenuVCMenuCollectionViewCell: UICollectionViewCell,
-                                                  PVCellCornerViewHighlight {
+class NavigationTestMenuVCMenuCollectionViewCell:
+    CollectionViewCell<NavigationTestMenuViewController>,
+    PVCellCornerViewHighlight {
+    
     @IBOutlet weak var cornerView: UIView!
+    @IBOutlet weak var cornerViewButton: UIButton!
     @IBOutlet weak var textLabel: UILabel!
     @IBOutlet weak var cornerViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var cornerViewWidthConstraint: NSLayoutConstraint!
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesBegan(touches, with: event)
-        updateBackground(highlighted: true, animated: false)
-    }
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesEnded(touches, with: event)
+    @IBAction func touchDown(_ sender: Any) {
+        guard let button = sender as? UIButton else {
+            return
+        }
         
-        let count = touches.filter {
-            touch in
-            let location = touch.location(in: cornerView)
-            return location.x >= 0 && location.x <= cornerView.frame.width
-                && location.y >= 0 && location.y <= cornerView.frame.height
-        }.count
-        if count == 0 {
-            updateBackground(highlighted: false, animated: false)
+        switch button {
+        case cornerViewButton:
+            updateBackground(highlighted: true, animated: false)
+            vc.selectionIndexPath = indexPath
+        default:
+            break
         }
     }
+    
+    @IBAction func touchUpInside(_ sender: Any) {
+        guard let button = sender as? UIButton else {
+            return
+        }
+        
+        switch button {
+        case cornerViewButton:
+            vc.collectionView(collectionView, didSelectItemOfItemAt: indexPath)
+        default:
+            break
+        }
+    }
+    
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        super.touchesBegan(touches, with: event)
+//        updateBackground(highlighted: true, animated: false)
+//    }
+//
+//    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        super.touchesEnded(touches, with: event)
+//
+//        let count = touches.filter {
+//            touch in
+//            let location = touch.location(in: cornerView)
+//            return location.x >= 0 && location.x <= cornerView.frame.width
+//                && location.y >= 0 && location.y <= cornerView.frame.height
+//        }.count
+//        if count == 0 {
+//            updateBackground(highlighted: false, animated: false)
+//        }
+//    }
 }
 
 class NavigationTestMenuViewController: LinkViewController<NavigationTestMenuVCModel> {
@@ -61,6 +91,15 @@ class NavigationTestMenuViewController: LinkViewController<NavigationTestMenuVCM
         switch action {
         case .dataSetting:
             sections = params["sections"] as? [S] ?? []
+        case .selectionResetting:
+            let animated = params["animated"] as? Bool ?? false
+            
+            if let indexPath = selectionIndexPath {
+                selectionIndexPath = nil
+                let cell = menuCollectionView.cellForItem(at: indexPath)
+                    as! NavigationTestMenuVCMenuCollectionViewCell
+                cell.updateBackground(highlighted: false, animated: animated)
+            }
         default:
             break
         }
@@ -73,31 +112,11 @@ class NavigationTestMenuViewController: LinkViewController<NavigationTestMenuVCM
         menuCollectionView.dataSource = self
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        if let indexPath = selectionIndexPath {
-            let cell = menuCollectionView.cellForItem(at: indexPath) as! NavigationTestMenuVCMenuCollectionViewCell
-            cell.updateBackground(highlighted: false, animated: true)
-        }
-    }
-    
-    override func dismissalCompletion() {
-        super.dismissalCompletion()
-        
-        if let indexPath = selectionIndexPath {
-            let cell = menuCollectionView.cellForItem(at: indexPath) as! NavigationTestMenuVCMenuCollectionViewCell
-            cell.updateBackground(highlighted: false, animated: true)
-        }
-    }
-    
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemOfItemAt indexPath: IndexPath) {
         super.collectionView(collectionView, didSelectItemAt: indexPath)
-        
-        let cell = collectionView.cellForItem(at: indexPath) as! NavigationTestMenuVCMenuCollectionViewCell
-        cell.updateBackground(highlighted: true, animated: false)
-        
-        selectionIndexPath = indexPath
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {

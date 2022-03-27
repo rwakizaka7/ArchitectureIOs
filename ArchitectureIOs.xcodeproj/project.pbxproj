@@ -14,6 +14,7 @@
 		9E52BA6227C122150025942F /* TableViewCellTest1ViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E52BA6127C122150025942F /* TableViewCellTest1ViewController.storyboard */; };
 		9E52BA6427C129210025942F /* TableViewCellTest1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E52BA6327C129210025942F /* TableViewCellTest1ViewController.swift */; };
 		9E52BA6627C148FF0025942F /* TableViewCellTest1VCModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E52BA6527C148FF0025942F /* TableViewCellTest1VCModel.swift */; };
+		9EBBC32827F010B70063AA14 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBBC32727F010B70063AA14 /* CollectionViewCell.swift */; };
 		9ECAB6E127CCE6B600D37F6B /* PVScrollPositonAdjustable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ECAB6E027CCE6B600D37F6B /* PVScrollPositonAdjustable.swift */; };
 		CF089DBE265A726700A6AAFB /* VerificationMenuViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF089DBD265A726700A6AAFB /* VerificationMenuViewController.storyboard */; };
 		CF089DC1265A73D500A6AAFB /* VerificationMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF089DBF265A73D500A6AAFB /* VerificationMenuViewController.swift */; };
@@ -63,6 +64,7 @@
 		9E52BA6127C122150025942F /* TableViewCellTest1ViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TableViewCellTest1ViewController.storyboard; sourceTree = "<group>"; };
 		9E52BA6327C129210025942F /* TableViewCellTest1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellTest1ViewController.swift; sourceTree = "<group>"; };
 		9E52BA6527C148FF0025942F /* TableViewCellTest1VCModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellTest1VCModel.swift; sourceTree = "<group>"; };
+		9EBBC32727F010B70063AA14 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		9ECAB6E027CCE6B600D37F6B /* PVScrollPositonAdjustable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PVScrollPositonAdjustable.swift; sourceTree = "<group>"; };
 		ADCA034A6EF05B6465BF5555 /* Pods_ArchitectureIOs.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ArchitectureIOs.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF089DBD265A726700A6AAFB /* VerificationMenuViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = VerificationMenuViewController.storyboard; sourceTree = "<group>"; };
@@ -222,6 +224,7 @@
 				CFCE540F2653D7CE009C947F /* BaseViewController.swift */,
 				9E32CDB727CB38A0008FBD0D /* TableView.swift */,
 				9E32CDB527CB1462008FBD0D /* TableViewCell.swift */,
+				9EBBC32727F010B70063AA14 /* CollectionViewCell.swift */,
 				CFCE54122653D7CE009C947F /* LinkNavigationController.swift */,
 				CFCE54102653D7CE009C947F /* LinkTabBarController.swift */,
 				CFCE54112653D7CE009C947F /* LinkViewController.swift */,
@@ -428,6 +431,7 @@
 				9E52BA6627C148FF0025942F /* TableViewCellTest1VCModel.swift in Sources */,
 				CFCE54422653D7CE009C947F /* EKEventStoreRepository.swift in Sources */,
 				CF089DC1265A73D500A6AAFB /* VerificationMenuViewController.swift in Sources */,
+				9EBBC32827F010B70063AA14 /* CollectionViewCell.swift in Sources */,
 				CF089DC2265A73D500A6AAFB /* NavigationTestMenuViewController.swift in Sources */,
 				9E32CDB827CB38A0008FBD0D /* TableView.swift in Sources */,
 				CF740EA1279163580087D47A /* AlamofireRepository.swift in Sources */,

@@ -12,8 +12,8 @@ class TableViewCellTest1VCFilteringTableViewCell:
     TableViewCell<TableViewCellTest1ViewController>,
     PVCellCornerViewHighlight {
     
-    @IBOutlet weak var cornerViewButton: UIButton!
     @IBOutlet weak var cornerView: UIView!
+    @IBOutlet weak var cornerViewButton: UIButton!
     @IBOutlet weak var _textLabel: UILabel!
     
     @IBAction func touchDown(_ sender: Any) {
@@ -37,7 +37,7 @@ class TableViewCellTest1VCFilteringTableViewCell:
         
         switch button {
         case cornerViewButton:
-            vc.tableView(tableView, didSelectRowItemAt: indexPath)
+            vc.tableView(tableView, didSelectItemOfRowAt: indexPath)
             updateBackground(highlighted: false, animated: true)
         default:
             break
@@ -66,7 +66,7 @@ class TableViewCellTest1ViewController: LinkViewController<TableViewCellTest1VCM
         switch action {
         case .dataSetting:
             sections = params["sections"] as? [S] ?? []
-        case .viewResetting:
+        case .selectionResetting:
             let animated = params["animated"] as? Bool ?? false
             
             if let indexPath = selectionIndexPath {
@@ -100,19 +100,10 @@ class TableViewCellTest1ViewController: LinkViewController<TableViewCellTest1VCM
         filteringTableView.dataSource = self
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        if let indexPath = selectionIndexPath {
-            selectionIndexPath = nil
-            filteringTableView.deselectRow(at: indexPath, animated: true)
-        }
-    }
-    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowItemAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectItemOfRowAt indexPath: IndexPath) {
         super.tableView(tableView, didSelectRowAt: indexPath)
     }
     
