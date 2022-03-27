@@ -59,6 +59,34 @@ class TableViewCellTest1ViewController: LinkViewController<TableViewCellTest1VCM
     var sections: [S] = []
     
     var selectionIndexPath: IndexPath!
+    var searchTextField: UITextField!
+    
+    override var textFields: [UITextField] {
+        return [searchTextField]
+    }
+    
+    override var testFieldShouldChangeCharacters: [UITextField: (String, Bool) -> Bool] {
+        return [searchTextField: {
+            [weak self] (text, clearing) -> Bool in
+            guard let self = self else {
+                return false
+            }
+            
+            print("text=\(text) clearing=\(clearing)")
+            
+            // Modelに移動予定
+            if clearing {
+                self.searchTextField.text = ""
+                self.searchTextField.resignFirstResponder()
+                return false
+            }
+            return true
+        }]
+    }
+    
+    override var textFieldFocusChangeList: [UITextField] {
+        return [searchTextField]
+    }
     
     override func receiveAction(_ action: ActionFromModel, params: [String : Any]) {
         super.receiveAction(action, params: params)
@@ -89,11 +117,14 @@ class TableViewCellTest1ViewController: LinkViewController<TableViewCellTest1VCM
                 searchBar.placeholder = "タイトルで探す"
                 searchBar.tintColor = UIColor.gray
                 searchBar.keyboardType = UIKeyboardType.default
+                searchBar.returnKeyType = .default
                 return searchBar
             }()
-            
             navigationItem.titleView = searchBar
             navigationItem.titleView?.frame = frame
+            
+            searchTextField = searchBar.searchTextField
+            searchTextField.delegate = self
         }
         
         filteringTableView.delegate = self

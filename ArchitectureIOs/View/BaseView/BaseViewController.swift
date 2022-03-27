@@ -16,14 +16,15 @@ class BaseViewController: UIViewController, PVViewController {
     var keyboardUpping = false
     var keyboardFrame: CGRect!
     
-    lazy var tapGestureViews: [UIView] = [self.view]
+    lazy var keyboardClosingViews: [UIView] = [view, navigationController?.view].compactMap { $0 }
+    lazy var tapGestureViews: [UIView] = keyboardClosingViews
     var tapGestureRecognizers: [UIView: UITapGestureRecognizer] = [:]
     
     var panGestureViews: [UIView] = []
     var panGestureRecognizers: [UIView: UIPanGestureRecognizer] = [:]
     
     var textFields: [UITextField] { [] }
-    var testFieldShouldChangeCharacters: [UITextField: (String) -> Bool] { [:] }
+    var testFieldShouldChangeCharacters: [UITextField: (String, Bool) -> Bool] { [:] }
     var textFieldFocusChangeList: [UITextField] { [] }
     
     lazy var subscriptions: [String: (viewWillAppear: ()->(),
@@ -175,6 +176,11 @@ class BaseViewController: UIViewController, PVViewController {
         super.viewWillAppear(animated)
         sendAction(.viewWillAppear)
         setNavigationStructure()
+        
+        subscriptions.values.forEach {
+            subscription in
+            subscription.viewWillAppear()
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -187,7 +193,7 @@ class BaseViewController: UIViewController, PVViewController {
         super.viewWillDisappear(animated)
         sendAction(.viewWillDisappear)
         
-        view.endEditing(true)
+        closeKeyboard()
         
         subscriptions.values.forEach {
             subscription in
@@ -201,11 +207,14 @@ class BaseViewController: UIViewController, PVViewController {
     }
     
     @objc func tapGestureRecognizer(_ sender: UITapGestureRecognizer) {
-        switch sender.view {
-        case view:
-            view.endEditing(true)
-        default:
-            break
+        if let view = sender.view, keyboardClosingViews.contains(view) {
+            closeKeyboard()
+        }
+    }
+    
+    func closeKeyboard() {
+        keyboardClosingViews.forEach {
+            $0.endEditing(true)
         }
     }
     
@@ -365,7 +374,7 @@ extension BaseViewController: UITextFieldDelegate {
         let text: String = (textField.text! as NSString).replacingCharacters(
             in: range, with: string)
         
-        return testFieldShouldChangeCharacters[textField]?(text) ?? true
+        return testFieldShouldChangeCharacters[textField]?(text, false) ?? true
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -378,6 +387,10 @@ extension BaseViewController: UITextFieldDelegate {
         }
         
         return true
+    }
+    
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        return testFieldShouldChangeCharacters[textField]?("", true) ?? true
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
