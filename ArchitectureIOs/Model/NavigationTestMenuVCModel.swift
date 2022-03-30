@@ -81,6 +81,24 @@ class NavigationTestMenuVCModel: LinkModel {
                 case 4:
                     var section = S(title: title, cells: [])
                     section.cells.append(C(title: "メニューへ", actionId: .replaceRootViewController))
+                    section.cells.append(C(title: "メニューへ", actionId: .replaceRootViewController))
+                    section.cells.append(C(title: "メニューへ", actionId: .replaceRootViewController))
+                    section.cells.append(C(title: "メニューへ", actionId: .replaceRootViewController))
+                    section.cells.append(C(title: "メニューへ", actionId: .replaceRootViewController))
+                    section.cells.append(C(title: "メニューへ", actionId: .replaceRootViewController))
+                    section.cells.append(C(title: "メニューへ", actionId: .replaceRootViewController))
+                    section.cells.append(C(title: "メニューへ", actionId: .replaceRootViewController))
+                    section.cells.append(C(title: "メニューへ", actionId: .replaceRootViewController))
+                    section.cells.append(C(title: "メニューへ", actionId: .replaceRootViewController))
+                    section.cells.append(C(title: "メニューへ", actionId: .replaceRootViewController))
+                    section.cells.append(C(title: "メニューへ", actionId: .replaceRootViewController))
+                    section.cells.append(C(title: "メニューへ", actionId: .replaceRootViewController))
+                    section.cells.append(C(title: "メニューへ", actionId: .replaceRootViewController))
+                    section.cells.append(C(title: "メニューへ", actionId: .replaceRootViewController))
+                    section.cells.append(C(title: "メニューへ", actionId: .replaceRootViewController))
+                    section.cells.append(C(title: "メニューへ", actionId: .replaceRootViewController))
+                    section.cells.append(C(title: "メニューへ", actionId: .replaceRootViewController))
+                    section.cells.append(C(title: "メニューへ", actionId: .replaceRootViewController))
                     return section
                 default:
                     break

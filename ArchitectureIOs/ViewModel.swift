@@ -35,8 +35,6 @@ enum ActionFromView: Hashable {
     case collectionViewReleasing
     case collectionViewSelection
     case messageBoxSelection
-    case calendarFunc(CalendarFunctionActionFromView)
-    case defaultCalendarVc(DefaultCalendarVcActionFromView)
 }
 
 indirect enum ActionFromModel: Hashable {
@@ -57,24 +55,6 @@ indirect enum ActionFromModel: Hashable {
     case dataSetting
     case selectionResetting
     case reloadData
-    case calendarFunc(CalendarFunctionActionFromModel)
-}
-
-enum CalendarFunctionActionFromView {
-    case screenInfoRequesting
-    case dayCellBeginTouch
-}
-
-enum CalendarFunctionActionFromModel {
-    case screensOverwriting
-    case eventsOverwriting
-    case screenResponsing
-    case screenPositionSettingAdding
-    case eventCellColCountSharing
-}
-
-enum DefaultCalendarVcActionFromView {
-    case configButtonTapping
 }
 
 class ViewModel<T: BaseModel>: NSObject, EClass {
