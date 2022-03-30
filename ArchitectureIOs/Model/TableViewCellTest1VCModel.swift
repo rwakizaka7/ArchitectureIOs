@@ -44,6 +44,28 @@ class TableViewCellTest1VCModel: LinkModel {
         switch action {
         case .viewDidLoad:
             sendAction(.dataSetting, params: ["sections":sections])
+        case .touchUpInside:
+            guard let buttonId = params["button_id"] as? String else {
+                return
+            }
+            switch buttonId {
+            case "search_clearing_button":
+                sendAction(.dataSetting, params: ["search_text_field":""])
+                sendAction(.resignFirstResponder, params: ["search_text_field":""])
+            default:
+                break
+            }
+        case .textFieldEditing:
+            guard let textId = params["text_id"] as? String,
+                let text = params["text"] as? String else {
+                return
+            }
+            switch textId {
+            case "search_text_field":
+                sendAction(.dataSetting, params: ["search_text_field":text])
+            default:
+                break
+            }
         case .tableViewSelection:
             break
         default:

@@ -71,16 +71,14 @@ class TableViewCellTest1ViewController: LinkViewController<TableViewCellTest1VCM
             guard let self = self else {
                 return false
             }
-            
-            print("text=\(text) clearing=\(clearing)")
-            
-            // Modelに移動予定
+
             if clearing {
-                self.searchTextField.text = ""
-                self.searchTextField.resignFirstResponder()
-                return false
+                self.sendAction(.touchUpInside, params: ["button_id":"search_clearing_button"])
+            } else {
+                self.sendAction(.textFieldEditing, params: ["text_id":"search_text_field", "text":text])
             }
-            return true
+            
+            return false
         }]
     }
     
@@ -93,7 +91,17 @@ class TableViewCellTest1ViewController: LinkViewController<TableViewCellTest1VCM
         
         switch action {
         case .dataSetting:
-            sections = params["sections"] as? [S] ?? []
+            if let _sections = params["sections"] as? [S] {
+                sections = _sections
+            }
+            
+            if let text = params["search_text_field"] as? String {
+                searchTextField.text = text
+            }
+        case .resignFirstResponder:
+            if let _ = params["search_text_field"] as? String {
+                searchTextField.resignFirstResponder()
+            }
         case .selectionResetting:
             let animated = params["animated"] as? Bool ?? false
             

@@ -20,6 +20,7 @@ enum ActionFromView: Hashable {
     case viewWillDisappear
     case viewDidDisappear
     case touchUpInside
+    case textFieldEditing
     case presentingCompletion
     case dismissalStating
     case dismissalCancel
@@ -53,6 +54,7 @@ indirect enum ActionFromModel: Hashable {
     case popParentNavigation
     case messageBox
     case dataSetting
+    case resignFirstResponder
     case selectionResetting
     case reloadData
 }
