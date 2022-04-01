@@ -17,7 +17,25 @@ class VerificationMenuVCModel: LinkModel  {
                          S(title: "WebAPI", cells:
                             [C(title: "WebAPI呼び出しテスト", actionId: .webApiCallingTestTransition)]),
                          S(title: "テーブルビュー", cells:
-                            [C(title: "一部のセルの更新", actionId: .tableViewCellTest1Transition)])]
+                            [C(title: "一部のセルの更新", actionId: .tableViewCellTest1Transition),
+                             C(title: "一部のセルの更新", actionId: .tableViewCellTest1Transition),
+                             C(title: "一部のセルの更新", actionId: .tableViewCellTest1Transition),
+                             C(title: "一部のセルの更新", actionId: .tableViewCellTest1Transition),
+                             C(title: "一部のセルの更新", actionId: .tableViewCellTest1Transition),
+                             C(title: "一部のセルの更新", actionId: .tableViewCellTest1Transition),
+                             C(title: "一部のセルの更新", actionId: .tableViewCellTest1Transition),
+                             C(title: "一部のセルの更新", actionId: .tableViewCellTest1Transition),
+                             C(title: "一部のセルの更新", actionId: .tableViewCellTest1Transition),
+                             C(title: "一部のセルの更新", actionId: .tableViewCellTest1Transition),
+                             C(title: "一部のセルの更新", actionId: .tableViewCellTest1Transition),
+                             C(title: "一部のセルの更新", actionId: .tableViewCellTest1Transition),
+                             C(title: "一部のセルの更新", actionId: .tableViewCellTest1Transition),
+                             C(title: "一部のセルの更新", actionId: .tableViewCellTest1Transition),
+                             C(title: "一部のセルの更新", actionId: .tableViewCellTest1Transition),
+                             C(title: "一部のセルの更新", actionId: .tableViewCellTest1Transition),
+                             C(title: "一部のセルの更新", actionId: .tableViewCellTest1Transition),
+                             C(title: "一部のセルの更新", actionId: .tableViewCellTest1Transition),
+                             C(title: "一部のセルの更新", actionId: .tableViewCellTest1Transition)])]
     
     override func receiveAction(_ action: ActionFromView, params: [String:Any]) {
         super.receiveAction(action, params: params)

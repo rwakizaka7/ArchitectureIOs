@@ -55,8 +55,8 @@ indirect enum ActionFromModel: Hashable {
     case messageBox
     case dataSetting
     case resignFirstResponder
-    case selectionResetting
     case reloadData
+    case selectionResetting
 }
 
 class ViewModel<T: BaseModel>: NSObject, EClass {

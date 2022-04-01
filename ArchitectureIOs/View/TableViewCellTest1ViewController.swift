@@ -56,10 +56,26 @@ class TableViewCellTest1ViewController: LinkViewController<TableViewCellTest1VCM
     
     @IBOutlet weak var filteringTableView: UITableView!
     
-    var sections: [S] = []
+    lazy var searchTextField: UITextField = {
+        let frame = navigationController!.navigationBar.bounds
+        let searchBar = { () -> UISearchBar in
+            let searchBar = UISearchBar(frame: frame)
+            searchBar.placeholder = "タイトルで探す"
+            searchBar.tintColor = UIColor.gray
+            searchBar.keyboardType = UIKeyboardType.default
+            searchBar.returnKeyType = .done
+            return searchBar
+        }()
+        navigationItem.titleView = searchBar
+        navigationItem.titleView?.frame = frame
+        
+        let textField = searchBar.searchTextField
+        textField.delegate = self
+        return textField
+    }()
     
+    var sections: [S] = []
     var selectionIndexPath: IndexPath!
-    var searchTextField: UITextField!
     
     override var textFields: [UITextField] {
         return [searchTextField]
@@ -74,11 +90,11 @@ class TableViewCellTest1ViewController: LinkViewController<TableViewCellTest1VCM
 
             if clearing {
                 self.sendAction(.touchUpInside, params: ["button_id":"search_clearing_button"])
-            } else {
-                self.sendAction(.textFieldEditing, params: ["text_id":"search_text_field", "text":text])
+                return false
             }
             
-            return false
+            self.sendAction(.textFieldEditing, params: ["text_id":"search_text_field", "text":text])
+            return true
         }]
     }
     
@@ -102,6 +118,10 @@ class TableViewCellTest1ViewController: LinkViewController<TableViewCellTest1VCM
             if let _ = params["search_text_field"] as? String {
                 searchTextField.resignFirstResponder()
             }
+        case .reloadData:
+            if let _ = params["filtering_table_view"] as? String {
+                filteringTableView.reloadData()
+            }
         case .selectionResetting:
             let animated = params["animated"] as? Bool ?? false
             
@@ -118,22 +138,6 @@ class TableViewCellTest1ViewController: LinkViewController<TableViewCellTest1VCM
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        if let frame = navigationController?.navigationBar.bounds {
-            let searchBar = { () -> UISearchBar in
-                let searchBar = UISearchBar(frame: frame)
-                searchBar.placeholder = "タイトルで探す"
-                searchBar.tintColor = UIColor.gray
-                searchBar.keyboardType = UIKeyboardType.default
-                searchBar.returnKeyType = .default
-                return searchBar
-            }()
-            navigationItem.titleView = searchBar
-            navigationItem.titleView?.frame = frame
-            
-            searchTextField = searchBar.searchTextField
-            searchTextField.delegate = self
-        }
         
         filteringTableView.delegate = self
         filteringTableView.dataSource = self

@@ -307,9 +307,7 @@ extension BaseViewController: UIScrollViewDelegate {
         sendActionWithScrollInfo(.scrollViewWillBeginDragging,
                                  scrollView: scrollView)
         
-        if !(scrollView is UITextView) {
-            view.endEditing(true)
-        }
+        closeKeyboard()
     }
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {

@@ -38,20 +38,30 @@ class TableViewCellTest1VCModel: LinkModel {
                              ])
                             ]
     
+    lazy var displayingSections: [S] = sections
+    
+    var searchText: String = ""
+    
     override func receiveAction(_ action: ActionFromView, params: [String:Any]) {
         super.receiveAction(action, params: params)
         
         switch action {
         case .viewDidLoad:
-            sendAction(.dataSetting, params: ["sections":sections])
+            sendAction(.dataSetting, params: ["search_text_field":searchText])
+            sendAction(.dataSetting, params: ["sections":displayingSections])
         case .touchUpInside:
             guard let buttonId = params["button_id"] as? String else {
                 return
             }
             switch buttonId {
             case "search_clearing_button":
-                sendAction(.dataSetting, params: ["search_text_field":""])
+                searchText = ""
+                sendAction(.dataSetting, params: ["search_text_field":searchText])
                 sendAction(.resignFirstResponder, params: ["search_text_field":""])
+                
+                displayingSections = extractSection(sections: sections, word: searchText)
+                sendAction(.dataSetting, params: ["sections":displayingSections])
+                sendAction(.reloadData, params: ["filtering_table_view":""])
             default:
                 break
             }
@@ -62,7 +72,10 @@ class TableViewCellTest1VCModel: LinkModel {
             }
             switch textId {
             case "search_text_field":
-                sendAction(.dataSetting, params: ["search_text_field":text])
+                searchText = text
+                displayingSections = extractSection(sections: sections, word: searchText)
+                sendAction(.dataSetting, params: ["sections":displayingSections])
+                sendAction(.reloadData, params: ["filtering_table_view":""])
             default:
                 break
             }
@@ -70,6 +83,20 @@ class TableViewCellTest1VCModel: LinkModel {
             break
         default:
             break
+        }
+    }
+    
+    func extractSection(sections: [S], word: String) -> [S] {
+        guard !word.isEmpty else {
+            return sections
+        }
+        return sections.reduce(into: [S]()) {
+            sections, section in
+            var section = section
+            section.cells = section.cells.filter {
+                $0.title!.contains(word)
+            }
+            sections.append(section)
         }
     }
 }

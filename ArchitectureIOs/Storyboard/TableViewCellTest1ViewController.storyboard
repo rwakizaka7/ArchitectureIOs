@@ -72,6 +72,7 @@
                                                 <constraint firstItem="L4G-JB-Y6c" firstAttribute="leading" secondItem="sK8-T3-QL2" secondAttribute="leading" constant="16" id="s0k-BB-BXC"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <outlet property="_textLabel" destination="uSk-L8-Kyt" id="TYd-gd-Amy"/>
                                             <outlet property="cornerView" destination="L4G-JB-Y6c" id="QEF-hd-9qB"/>
