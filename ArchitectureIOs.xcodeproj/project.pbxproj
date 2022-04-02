@@ -17,6 +17,7 @@
 		9EBBC32827F010B70063AA14 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBBC32727F010B70063AA14 /* CollectionViewCell.swift */; };
 		9ECAB6E127CCE6B600D37F6B /* PVScrollPositonAdjustable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ECAB6E027CCE6B600D37F6B /* PVScrollPositonAdjustable.swift */; };
 		9EDA9E1727F4915B0014671F /* CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EDA9E1627F4915B0014671F /* CollectionView.swift */; };
+		9EF8B76927F8B79600CC57D9 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF8B76827F8B79600CC57D9 /* Utils.swift */; };
 		CF089DBE265A726700A6AAFB /* VerificationMenuViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF089DBD265A726700A6AAFB /* VerificationMenuViewController.storyboard */; };
 		CF089DC1265A73D500A6AAFB /* VerificationMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF089DBF265A73D500A6AAFB /* VerificationMenuViewController.swift */; };
 		CF089DC2265A73D500A6AAFB /* NavigationTestMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF089DC0265A73D500A6AAFB /* NavigationTestMenuViewController.swift */; };
@@ -68,6 +69,7 @@
 		9EBBC32727F010B70063AA14 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		9ECAB6E027CCE6B600D37F6B /* PVScrollPositonAdjustable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PVScrollPositonAdjustable.swift; sourceTree = "<group>"; };
 		9EDA9E1627F4915B0014671F /* CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionView.swift; sourceTree = "<group>"; };
+		9EF8B76827F8B79600CC57D9 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		ADCA034A6EF05B6465BF5555 /* Pods_ArchitectureIOs.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ArchitectureIOs.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF089DBD265A726700A6AAFB /* VerificationMenuViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = VerificationMenuViewController.storyboard; sourceTree = "<group>"; };
 		CF089DBF265A73D500A6AAFB /* VerificationMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerificationMenuViewController.swift; sourceTree = "<group>"; };
@@ -172,6 +174,7 @@
 				CFCE53ED2653D73B009C947F /* AppDelegate.swift */,
 				CFCE53EF2653D73B009C947F /* SceneDelegate.swift */,
 				9E475A7B27CB76ED006E29D8 /* ViewUtils.swift */,
+				9EF8B76827F8B79600CC57D9 /* Utils.swift */,
 				CFCE53F62653D73C009C947F /* Assets.xcassets */,
 				CFCE53FB2653D73C009C947F /* Info.plist */,
 			);
@@ -409,6 +412,7 @@
 				9E475A7C27CB76ED006E29D8 /* ViewUtils.swift in Sources */,
 				CFCE543B2653D7CE009C947F /* BaseModel.swift in Sources */,
 				CFCE542D2653D7CE009C947F /* PVCellCornerViewHighlight.swift in Sources */,
+				9EF8B76927F8B79600CC57D9 /* Utils.swift in Sources */,
 				CFCE542E2653D7CE009C947F /* PVViewController.swift in Sources */,
 				9EDA9E1727F4915B0014671F /* CollectionView.swift in Sources */,
 				CF089DC5265A742E00A6AAFB /* VerificationMenuVCModel.swift in Sources */,

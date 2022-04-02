@@ -21,7 +21,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TableViewCellTest1VCFilteringTableViewCell" id="ZPR-K5-Pqm" customClass="TableViewCellTest1VCFilteringTableViewCell" customModule="ArchitectureIOs" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TableViewCellTest1VCFilteringTableViewCell1" id="ZPR-K5-Pqm" customClass="TableViewCellTest1VCFilteringTableViewCell1" customModule="ArchitectureIOs" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="49.5" width="414" height="74"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ZPR-K5-Pqm" id="sK8-T3-QL2">
@@ -35,8 +35,8 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="382" height="62"/>
                                                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                             <connections>
-                                                                <action selector="touchDown:" destination="ZPR-K5-Pqm" eventType="touchDown" id="Bm5-EJ-cfo"/>
-                                                                <action selector="touchUpInside:" destination="ZPR-K5-Pqm" eventType="touchUpInside" id="6DN-7d-CNi"/>
+                                                                <action selector="touchDown:" destination="ZPR-K5-Pqm" eventType="touchDown" id="YcC-9h-dae"/>
+                                                                <action selector="touchUpInside:" destination="ZPR-K5-Pqm" eventType="touchUpInside" id="rWy-Je-jEl"/>
                                                             </connections>
                                                         </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mac OS X Public Beta (Siam)" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uSk-L8-Kyt">
@@ -58,11 +58,6 @@
                                                         <constraint firstAttribute="trailing" secondItem="ruA-Op-fTz" secondAttribute="trailing" id="gWS-z8-xxb"/>
                                                         <constraint firstItem="ruA-Op-fTz" firstAttribute="leading" secondItem="L4G-JB-Y6c" secondAttribute="leading" id="k3b-nM-mVr"/>
                                                     </constraints>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                            <integer key="value" value="8"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
                                                 </view>
                                             </subviews>
                                             <constraints>
@@ -74,9 +69,48 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
-                                            <outlet property="_textLabel" destination="uSk-L8-Kyt" id="TYd-gd-Amy"/>
-                                            <outlet property="cornerView" destination="L4G-JB-Y6c" id="QEF-hd-9qB"/>
-                                            <outlet property="cornerViewButton" destination="ruA-Op-fTz" id="4vx-cV-0dy"/>
+                                            <outlet property="_textLabel" destination="uSk-L8-Kyt" id="Va6-Z6-qWV"/>
+                                            <outlet property="cornerView" destination="L4G-JB-Y6c" id="Pbf-Gv-MA9"/>
+                                            <outlet property="cornerViewButton" destination="ruA-Op-fTz" id="ehJ-wE-fh2"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="TableViewCellTest1VCFilteringTableViewCell2" id="4Uv-7s-3s8" customClass="TableViewCellTest1VCFilteringTableViewCell2" customModule="ArchitectureIOs" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="123.5" width="414" height="160"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4Uv-7s-3s8" id="Vyh-yL-5hx">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="160"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ugT-tb-kMx">
+                                                    <rect key="frame" x="16" y="16" width="382" height="128"/>
+                                                    <subviews>
+                                                        <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IAp-4i-dSY">
+                                                            <rect key="frame" x="0.0" y="0.0" width="382" height="128"/>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="128" id="rcy-WC-ych"/>
+                                                            </constraints>
+                                                        </view>
+                                                    </subviews>
+                                                    <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <integer key="value" value="8"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="ugT-tb-kMx" secondAttribute="bottom" constant="16" id="33L-my-4Dg"/>
+                                                <constraint firstItem="ugT-tb-kMx" firstAttribute="leading" secondItem="Vyh-yL-5hx" secondAttribute="leading" constant="16" id="5kU-w3-J6Q"/>
+                                                <constraint firstAttribute="trailing" secondItem="ugT-tb-kMx" secondAttribute="trailing" constant="16" id="ned-fG-hES"/>
+                                                <constraint firstItem="ugT-tb-kMx" firstAttribute="top" secondItem="Vyh-yL-5hx" secondAttribute="top" constant="16" id="zgB-fG-IHr"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <outlet property="_titleView" destination="IAp-4i-dSY" id="PRM-qQ-fga"/>
+                                            <outlet property="stackView" destination="ugT-tb-kMx" id="THf-if-eiR"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

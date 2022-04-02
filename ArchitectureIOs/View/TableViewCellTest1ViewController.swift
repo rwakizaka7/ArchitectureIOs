@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class TableViewCellTest1VCFilteringTableViewCell:
+class TableViewCellTest1VCFilteringTableViewCell1:
     TableViewCell<TableViewCellTest1ViewController>,
     PVCellCornerViewHighlight {
     
@@ -48,6 +48,21 @@ class TableViewCellTest1VCFilteringTableViewCell:
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
+    }
+}
+
+class TableViewCellTest1VCFilteringTableViewCell2:
+    TableViewCell<TableViewCellTest1ViewController> {
+    @IBOutlet weak var stackView: UIStackView!
+    @IBOutlet weak var _titleView: UIView!
+    var titleView: UIView!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        if titleView == nil {
+            titleView = _titleView
+        }
     }
 }
 
@@ -122,13 +137,20 @@ class TableViewCellTest1ViewController: LinkViewController<TableViewCellTest1VCM
             if let _ = params["filtering_table_view"] as? String {
                 filteringTableView.reloadData()
             }
+        case .reloadRows:
+            guard let indexPaths = params["index_paths"] as? [IndexPath],
+                let rowAnimation = params["row_animation"] as? RowAnimation else {
+                return
+            }
+            
+            filteringTableView.reloadRows(at: indexPaths, with: rowAnimation)
         case .selectionResetting:
             let animated = params["animated"] as? Bool ?? false
             
-            if let indexPath = selectionIndexPath {
+            if let indexPath = selectionIndexPath,
+               let cell = filteringTableView.cellForRow(at: indexPath)
+                   as? TableViewCellTest1VCFilteringTableViewCell1 {
                 selectionIndexPath = nil
-                let cell = filteringTableView.cellForRow(at: indexPath)
-                    as! TableViewCellTest1VCFilteringTableViewCell
                 cell.updateBackground(highlighted: false, animated: animated)
             }
         default:
@@ -178,10 +200,36 @@ class TableViewCellTest1ViewController: LinkViewController<TableViewCellTest1VCM
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(
-            withIdentifier: "TableViewCellTest1VCFilteringTableViewCell", for: indexPath)
-            as! TableViewCellTest1VCFilteringTableViewCell
-        cell._textLabel?.text = sections[indexPath.section].cells[indexPath.row].title
-        return cell
+        let cellInfo = sections[indexPath.section].cells[indexPath.row]
+        switch cellInfo.status {
+        case .normal:
+            let cell = tableView.dequeueReusableCell(
+                withIdentifier: "TableViewCellTest1VCFilteringTableViewCell1", for: indexPath)
+                as! TableViewCellTest1VCFilteringTableViewCell1
+            cell.cornerView.layer.cornerRadius = 8
+            cell.cornerView.layer.maskedCorners = [
+                .layerMinXMinYCorner,
+                .layerMaxXMinYCorner,
+                .layerMinXMaxYCorner,
+                .layerMaxXMaxYCorner]
+            cell._textLabel?.text = cellInfo.title
+            
+            return cell
+        case .editing:
+            let cell = tableView.dequeueReusableCell(
+                withIdentifier: "TableViewCellTest1VCFilteringTableViewCell2", for: indexPath)
+                as! TableViewCellTest1VCFilteringTableViewCell2
+            
+            cell.stackView.subviews.forEach {
+                $0.removeFromSuperview()
+            }
+            
+            cell.stackView.addArrangedSubview(
+                Utils.copy(cell.titleView))
+            cell.stackView.addArrangedSubview(
+                Utils.copy(cell.titleView))
+            
+            return cell
+        }
     }
 }

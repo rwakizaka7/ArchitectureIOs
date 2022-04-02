@@ -11,30 +11,30 @@ class TableViewCellTest1VCModel: LinkModel {
     typealias S = TableViewCellTest1VCMenuTableSection
     typealias C = TableViewCellTest1VCMenuTableCell
     
-    let sections: [S] = [S(title: "Mac OS X", cells:
-                            [C(title: "Mac OS X Public Beta (Siam)"),
-                             C(title: "Mac OS X 10.0 (Cheetah)"),
-                             C(title: "Mac OS X 10.1 (Puma)"),
-                             C(title: "Mac OS X 10.2 (Jaguar)"),
-                             C(title: "Mac OS X 10.3 (Panther)"),
-                             C(title: "Mac OS X 10.4 (Tiger)"),
-                             C(title: "Mac OS X 10.5 (Leopard)"),
-                             C(title: "Mac OS X 10.6 (Snow Leopard)"),
-                             C(title: "Mac OS X 10.7 (Lion)")
+    var sections: [S] = [S(title: "Mac OS X", cells:
+                            [C(status: .normal, title: "Mac OS X Public Beta (Siam)"),
+                             C(status: .normal, title: "Mac OS X 10.0 (Cheetah)"),
+                             C(status: .normal, title: "Mac OS X 10.1 (Puma)"),
+                             C(status: .normal, title: "Mac OS X 10.2 (Jaguar)"),
+                             C(status: .normal, title: "Mac OS X 10.3 (Panther)"),
+                             C(status: .normal, title: "Mac OS X 10.4 (Tiger)"),
+                             C(status: .normal, title: "Mac OS X 10.5 (Leopard)"),
+                             C(status: .normal, title: "Mac OS X 10.6 (Snow Leopard)"),
+                             C(status: .normal, title: "Mac OS X 10.7 (Lion)")
                             ]),
                          S(title: "OS X 10", cells:
-                            [C(title: "OS X 10.8 Mountain Lion"),
-                             C(title: "OS X 10.9 Mavericks"),
-                             C(title: "OS X 10.10 Yosemite"),
-                             C(title: "OS X 10.11 El Capitan")
+                            [C(status: .normal, title: "OS X 10.8 Mountain Lion"),
+                             C(status: .normal, title: "OS X 10.9 Mavericks"),
+                             C(status: .normal, title: "OS X 10.10 Yosemite"),
+                             C(status: .normal, title: "OS X 10.11 El Capitan")
                              ]),
                          S(title: "macOS", cells:
-                            [C(title: "macOS Sierra 10.12"),
-                             C(title: "macOS High Sierra 10.13"),
-                             C(title: "macOS Mojave 10.14"),
-                             C(title: "macOS Catalina 10.15"),
-                             C(title: "macOS Big Sur 11"),
-                             C(title: "macOS Monterey 12")
+                            [C(status: .normal, title: "macOS Sierra 10.12"),
+                             C(status: .normal, title: "macOS High Sierra 10.13"),
+                             C(status: .normal, title: "macOS Mojave 10.14"),
+                             C(status: .normal, title: "macOS Catalina 10.15"),
+                             C(status: .normal, title: "macOS Big Sur 11"),
+                             C(status: .normal, title: "macOS Monterey 12")
                              ])
                             ]
     
@@ -80,7 +80,15 @@ class TableViewCellTest1VCModel: LinkModel {
                 break
             }
         case .tableViewSelection:
-            break
+            guard let indexPath = params["index_path"] as? IndexPath else {
+                return
+            }
+            
+            sections[indexPath.section].cells[indexPath.row].status = .editing
+            displayingSections = extractSection(sections: sections, word: searchText)
+            sendAction(.dataSetting, params: ["sections":displayingSections])
+            sendAction(.reloadRows, params: ["index_paths":[indexPath],
+                                             "row_animation":RowAnimation.fade])
         default:
             break
         }
@@ -94,7 +102,7 @@ class TableViewCellTest1VCModel: LinkModel {
             sections, section in
             var section = section
             section.cells = section.cells.filter {
-                $0.title!.contains(word)
+                $0.title.contains(word)
             }
             sections.append(section)
         }

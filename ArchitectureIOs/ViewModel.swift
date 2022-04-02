@@ -56,6 +56,7 @@ indirect enum ActionFromModel: Hashable {
     case dataSetting
     case resignFirstResponder
     case reloadData
+    case reloadRows
     case selectionResetting
 }
 

@@ -13,16 +13,17 @@ typealias ModalPresentationStyle = UIModalPresentationStyle
 typealias ModalTransitionStyle = UIModalTransitionStyle
 typealias AlertStyle = UIAlertController.Style
 typealias AlertActionStyle = UIAlertAction.Style
+typealias RowAnimation = UITableView.RowAnimation
 
 // VerificationMenuViewController
 
 struct VerificationMenuVCMenuTableSection {
-    var title: String!
+    var title: String
     var cells: [VerificationMenuVCMenuTableCell] = []
 }
 
 struct VerificationMenuVCMenuTableCell {
-    var title: String!
+    var title: String
     var actionId: VerificationMenuVCActionId!
 }
 
@@ -35,12 +36,12 @@ enum VerificationMenuVCActionId {
 // WebApiCallingTestViewController
 
 struct WebApiCallingTestVCMenuTableSection {
-    var title: String!
+    var title: String
     var cells: [WebApiCallingTestVCMenuTableCell] = []
 }
 
 struct WebApiCallingTestVCMenuTableCell {
-    var title: String!
+    var title: String
     var actionId: WebApiCallingTestVCMenuVCActionId!
 }
 
@@ -51,12 +52,12 @@ enum WebApiCallingTestVCMenuVCActionId {
 // NavigationTestMenuViewController
 
 struct NavigationTestMenuVCMenuTableSection {
-    var title: String!
+    var title: String
     var cells: [NavigationTestMenuVCMenuTableCell] = []
 }
 
 struct NavigationTestMenuVCMenuTableCell {
-    var title: String!
+    var title: String
     var actionId: NavigationTestMenuVCMenuVCActionId!
 }
 
@@ -73,15 +74,17 @@ enum NavigationTestMenuVCMenuVCActionId {
 
 // TableViewCellTest1ViewController
 
-enum TableViewCellTest1VCMenuVCActionId {
-    case action1
-}
-
 struct TableViewCellTest1VCMenuTableSection {
-    var title: String!
+    var title: String
     var cells: [TableViewCellTest1VCMenuTableCell] = []
 }
 
+enum TableViewCellTest1VCMenuVCCellStatus {
+    case normal
+    case editing
+}
+
 struct TableViewCellTest1VCMenuTableCell {
-    var title: String!
+    var status: TableViewCellTest1VCMenuVCCellStatus
+    var title: String
 }
