@@ -20,8 +20,6 @@ class NavigationTestMenuVCMenuCollectionViewCell:
     @IBOutlet weak var cornerView: UIView!
     @IBOutlet weak var cornerViewButton: UIButton!
     @IBOutlet weak var textLabel: UILabel!
-    @IBOutlet weak var cornerViewHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var cornerViewWidthConstraint: NSLayoutConstraint!
     
     @IBAction func touchDown(_ sender: Any) {
         guard let button = sender as? UIButton else {
@@ -32,6 +30,20 @@ class NavigationTestMenuVCMenuCollectionViewCell:
         case cornerViewButton:
             updateBackground(highlighted: true, animated: false)
             vc.selectionIndexPath = indexPath
+        default:
+            break
+        }
+    }
+    
+    @IBAction func touchDragExit(_ sender: Any) {
+        guard let button = sender as? UIButton else {
+            return
+        }
+        
+        switch button {
+        case cornerViewButton:
+            updateBackground(highlighted: false, animated: false)
+            vc.selectionIndexPath = nil
         default:
             break
         }
@@ -79,12 +91,6 @@ class NavigationTestMenuViewController: LinkViewController<NavigationTestMenuVCM
     
     var selectionIndexPath: IndexPath!
     
-    let sectionHeaderHeight: CGFloat = 45
-    let lastSectionFooterHeight: CGFloat = 45
-    let sectionInsetsOnHorizontalAxis: CGFloat = 16
-    let menuCollectionViewColNum = 3
-    let cellPadding: CGFloat = 8
-    
     override func receiveAction(_ action: ActionFromModel, params: [String : Any]) {
         super.receiveAction(action, params: params)
         
@@ -112,6 +118,28 @@ class NavigationTestMenuViewController: LinkViewController<NavigationTestMenuVCM
         menuCollectionView.dataSource = self
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        let width: CGFloat = view.bounds.size.width
+        print("width=\(view.frame.width) \(view.bounds.size)")
+        let colCount: CGFloat = 3
+        let cellAreaMargin: CGFloat = 20
+        let cellMargin: CGFloat = 12
+        let layout = UICollectionViewFlowLayout()
+        layout.sectionInset = UIEdgeInsets(top: cellAreaMargin, left: cellAreaMargin,
+                                           bottom: cellAreaMargin, right: cellAreaMargin)
+        var size = CGSize()
+        let areaMargin = cellAreaMargin * 2
+        let allCellSpace = cellMargin * (colCount - 1)
+        size.width = floor((width - areaMargin - allCellSpace) / colCount)
+        size.height = floor(size.width * 100 / 144)
+        layout.itemSize = size
+        layout.minimumInteritemSpacing = cellMargin
+        layout.minimumLineSpacing = cellMargin
+        menuCollectionView.collectionViewLayout = layout
+    }
+    
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     }
     
@@ -126,18 +154,12 @@ class NavigationTestMenuViewController: LinkViewController<NavigationTestMenuVCM
     func collectionView(_ collectionView: UICollectionView,
                         viewForSupplementaryElementOfKind kind: String,
                         at indexPath: IndexPath) -> UICollectionReusableView {
-        if kind == UICollectionView.elementKindSectionHeader {
-            let header = collectionView.dequeueReusableSupplementaryView(
-                ofKind: kind, withReuseIdentifier: "NavigationTestMenuVcMenuCollectionViewHeader",
-                for: indexPath) as! NavigationTestMenuVcMenuCollectionViewHeader
-            
-            header.textLabel.text = sections[indexPath.section].title
-            return header
-        } else {
-            return collectionView.dequeueReusableSupplementaryView(
-                ofKind: kind, withReuseIdentifier:
-                "NavigationTestMenuVcMenuCollectionViewFooter", for: indexPath)
-        }
+        let header = collectionView.dequeueReusableSupplementaryView(
+            ofKind: kind, withReuseIdentifier: "NavigationTestMenuVcMenuCollectionViewHeader",
+            for: indexPath) as! NavigationTestMenuVcMenuCollectionViewHeader
+        
+        header.textLabel.text = sections[indexPath.section].title
+        return header
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -150,27 +172,7 @@ class NavigationTestMenuViewController: LinkViewController<NavigationTestMenuVCM
             withReuseIdentifier: "NavigationTestMenuVCMenuCollectionViewCell", for: indexPath)
             as! NavigationTestMenuVCMenuCollectionViewCell
         cell.textLabel?.text = sections[indexPath.section].cells[indexPath.row].title
-        
-        let size = getMenuCollectionViewCellWidth(
-            overallSize: collectionView.frame.size, indexPath: indexPath)
-        cell.cornerViewWidthConstraint.constant = size.width - cellPadding * 2
-        cell.cornerViewHeightConstraint.constant = size.height - cellPadding * 2
         return cell
-    }
-    
-    func getMenuCollectionViewCellWidth(overallSize: CGSize, indexPath: IndexPath) -> CGSize {
-        var size = CGSize()
-        let colCount = menuCollectionViewColNum
-
-        let width = overallSize.width - sectionInsetsOnHorizontalAxis * 2
-        size.width = floor(width / CGFloat(colCount))
-        let widthRemainder = Int(width) % colCount
-        let colIdx = indexPath.item % colCount
-        if colIdx < widthRemainder - 1 {
-            size.width = size.width + 1
-        }
-        size.height = floor(size.width * 100 / 144)
-        return size
     }
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -189,26 +191,6 @@ class NavigationTestMenuViewController: LinkViewController<NavigationTestMenuVCM
 
 extension NavigationTestMenuViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: collectionView.frame.width, height: sectionHeaderHeight)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
-        
-        let height: CGFloat
-        if section < sections.count - 1 {
-            height = 0
-        } else {
-            height = lastSectionFooterHeight
-        }
-        
-        return CGSize(width: collectionView.frame.width, height: height)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        sizeForItemAt indexPath: IndexPath) -> CGSize {
-
-        return getMenuCollectionViewCellWidth(overallSize: collectionView.frame.size,
-                                              indexPath: indexPath)
+        return CGSize(width: collectionView.frame.width, height: 32)
     }
 }

@@ -24,7 +24,7 @@
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="hy4-bN-QId">
                                     <size key="itemSize" width="144" height="100"/>
                                     <size key="headerReferenceSize" width="50" height="50"/>
-                                    <size key="footerReferenceSize" width="50" height="50"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="16" minY="0.0" maxX="16" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
@@ -36,23 +36,24 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G7b-Ls-1Kx">
-                                                    <rect key="frame" x="8" y="8" width="128" height="84"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="144" height="100"/>
                                                     <subviews>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7YN-Ph-gO3">
-                                                            <rect key="frame" x="0.0" y="0.0" width="128" height="84"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="144" height="100"/>
                                                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                             <connections>
                                                                 <action selector="touchDown:" destination="vKT-MI-y8u" eventType="touchDown" id="NsI-li-CuA"/>
+                                                                <action selector="touchDragExit:" destination="vKT-MI-y8u" eventType="touchDragExit" id="3y8-8M-Gov"/>
                                                                 <action selector="touchUpInside:" destination="vKT-MI-y8u" eventType="touchUpInside" id="ESc-pG-nLQ"/>
                                                             </connections>
                                                         </button>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PqF-xf-LT7">
-                                                            <rect key="frame" x="8" y="8" width="112" height="68"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="PqF-xf-LT7">
+                                                            <rect key="frame" x="8" y="8" width="128" height="84"/>
                                                             <attributedString key="attributedText">
-                                                                <fragment content="Push Navigation">
+                                                                <fragment content="Push">
                                                                     <attributes>
                                                                         <font key="NSFont" size="13" name="HiraginoSans-W3"/>
-                                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="4" tighteningFactorForTruncation="0.0"/>
+                                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="truncatingTail" baseWritingDirection="natural" lineSpacing="4" tighteningFactorForTruncation="0.0"/>
                                                                     </attributes>
                                                                 </fragment>
                                                             </attributedString>
@@ -63,10 +64,8 @@
                                                     <constraints>
                                                         <constraint firstItem="7YN-Ph-gO3" firstAttribute="leading" secondItem="G7b-Ls-1Kx" secondAttribute="leading" id="5Oh-c8-mFf"/>
                                                         <constraint firstItem="7YN-Ph-gO3" firstAttribute="top" secondItem="G7b-Ls-1Kx" secondAttribute="top" id="7rO-21-Pdd"/>
-                                                        <constraint firstAttribute="height" constant="100" id="IaX-Vx-5rl"/>
                                                         <constraint firstAttribute="trailing" secondItem="7YN-Ph-gO3" secondAttribute="trailing" id="d4f-pc-ewN"/>
                                                         <constraint firstAttribute="bottom" secondItem="PqF-xf-LT7" secondAttribute="bottom" constant="8" id="hkK-Ya-Xze"/>
-                                                        <constraint firstAttribute="width" constant="144" id="jwp-5D-3P9"/>
                                                         <constraint firstItem="PqF-xf-LT7" firstAttribute="leading" secondItem="G7b-Ls-1Kx" secondAttribute="leading" constant="8" id="kEh-N5-ysk"/>
                                                         <constraint firstAttribute="trailing" secondItem="PqF-xf-LT7" secondAttribute="trailing" constant="8" id="nEU-4K-4Qx"/>
                                                         <constraint firstItem="PqF-xf-LT7" firstAttribute="top" secondItem="G7b-Ls-1Kx" secondAttribute="top" constant="8" id="pJe-bk-Uud"/>
@@ -80,17 +79,15 @@
                                                 </view>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="G7b-Ls-1Kx" secondAttribute="bottom" constant="8" id="HUE-HN-cec"/>
-                                                <constraint firstAttribute="trailing" secondItem="G7b-Ls-1Kx" secondAttribute="trailing" constant="8" id="NGx-As-EwX"/>
-                                                <constraint firstItem="G7b-Ls-1Kx" firstAttribute="top" secondItem="hJS-4y-W6H" secondAttribute="top" constant="8" id="Xgc-z4-zX3"/>
-                                                <constraint firstItem="G7b-Ls-1Kx" firstAttribute="leading" secondItem="hJS-4y-W6H" secondAttribute="leading" constant="8" id="lCR-yf-rJm"/>
+                                                <constraint firstAttribute="bottom" secondItem="G7b-Ls-1Kx" secondAttribute="bottom" id="HUE-HN-cec"/>
+                                                <constraint firstAttribute="trailing" secondItem="G7b-Ls-1Kx" secondAttribute="trailing" id="NGx-As-EwX"/>
+                                                <constraint firstItem="G7b-Ls-1Kx" firstAttribute="top" secondItem="hJS-4y-W6H" secondAttribute="top" id="Xgc-z4-zX3"/>
+                                                <constraint firstItem="G7b-Ls-1Kx" firstAttribute="leading" secondItem="hJS-4y-W6H" secondAttribute="leading" id="lCR-yf-rJm"/>
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <connections>
                                             <outlet property="cornerView" destination="G7b-Ls-1Kx" id="YBi-F7-iWA"/>
                                             <outlet property="cornerViewButton" destination="7YN-Ph-gO3" id="c4L-k1-CW1"/>
-                                            <outlet property="cornerViewHeightConstraint" destination="IaX-Vx-5rl" id="M3k-bd-Of4"/>
-                                            <outlet property="cornerViewWidthConstraint" destination="jwp-5D-3P9" id="lX7-DO-3Ef"/>
                                             <outlet property="textLabel" destination="PqF-xf-LT7" id="Kj6-fX-e6N"/>
                                         </connections>
                                     </collectionViewCell>
@@ -99,7 +96,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Parent Navigation" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EhR-ze-dD9">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="自身のナビゲーション(1階層)" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EhR-ze-dD9">
                                             <rect key="frame" x="19" y="12" width="376" height="38"/>
                                             <fontDescription key="fontDescription" name="HiraginoSans-W3" family="Hiragino Sans" pointSize="13"/>
                                             <color key="textColor" systemColor="secondaryLabelColor"/>
@@ -115,10 +112,6 @@
                                     <connections>
                                         <outlet property="textLabel" destination="EhR-ze-dD9" id="TEm-nd-s7r"/>
                                     </connections>
-                                </collectionReusableView>
-                                <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="NavigationTestMenuVcMenuCollectionViewFooter" id="bpB-L2-NeV">
-                                    <rect key="frame" x="0.0" y="150" width="414" height="50"/>
-                                    <autoresizingMask key="autoresizingMask"/>
                                 </collectionReusableView>
                             </collectionView>
                         </subviews>
