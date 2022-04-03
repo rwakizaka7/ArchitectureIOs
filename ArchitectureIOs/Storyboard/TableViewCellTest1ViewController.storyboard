@@ -29,10 +29,10 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L4G-JB-Y6c">
-                                                    <rect key="frame" x="16" y="6" width="382" height="62"/>
+                                                    <rect key="frame" x="15" y="6" width="384" height="62"/>
                                                     <subviews>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ruA-Op-fTz">
-                                                            <rect key="frame" x="0.0" y="0.0" width="382" height="62"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="384" height="62"/>
                                                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                             <connections>
                                                                 <action selector="touchDown:" destination="ZPR-K5-Pqm" eventType="touchDown" id="YcC-9h-dae"/>
@@ -40,7 +40,7 @@
                                                             </connections>
                                                         </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mac OS X Public Beta (Siam)" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uSk-L8-Kyt">
-                                                            <rect key="frame" x="16" y="16" width="350" height="30"/>
+                                                            <rect key="frame" x="15" y="15" width="354" height="32"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -48,12 +48,12 @@
                                                     </subviews>
                                                     <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                                                     <constraints>
-                                                        <constraint firstItem="uSk-L8-Kyt" firstAttribute="top" secondItem="L4G-JB-Y6c" secondAttribute="top" constant="16" id="B8u-Yn-0Ym"/>
-                                                        <constraint firstAttribute="bottom" secondItem="uSk-L8-Kyt" secondAttribute="bottom" constant="16" id="Ilb-rn-FQB"/>
+                                                        <constraint firstItem="uSk-L8-Kyt" firstAttribute="top" secondItem="L4G-JB-Y6c" secondAttribute="top" constant="15" id="B8u-Yn-0Ym"/>
+                                                        <constraint firstAttribute="bottom" secondItem="uSk-L8-Kyt" secondAttribute="bottom" constant="15" id="Ilb-rn-FQB"/>
                                                         <constraint firstItem="ruA-Op-fTz" firstAttribute="top" secondItem="L4G-JB-Y6c" secondAttribute="top" id="KMA-93-bjZ"/>
                                                         <constraint firstAttribute="bottom" secondItem="ruA-Op-fTz" secondAttribute="bottom" id="OEv-jl-cCa"/>
-                                                        <constraint firstAttribute="trailing" secondItem="uSk-L8-Kyt" secondAttribute="trailing" constant="16" id="SDf-JW-RAf"/>
-                                                        <constraint firstItem="uSk-L8-Kyt" firstAttribute="leading" secondItem="L4G-JB-Y6c" secondAttribute="leading" constant="16" id="UpD-pe-vw1"/>
+                                                        <constraint firstAttribute="trailing" secondItem="uSk-L8-Kyt" secondAttribute="trailing" constant="15" id="SDf-JW-RAf"/>
+                                                        <constraint firstItem="uSk-L8-Kyt" firstAttribute="leading" secondItem="L4G-JB-Y6c" secondAttribute="leading" constant="15" id="UpD-pe-vw1"/>
                                                         <constraint firstAttribute="height" constant="62" id="atU-We-pTk"/>
                                                         <constraint firstAttribute="trailing" secondItem="ruA-Op-fTz" secondAttribute="trailing" id="gWS-z8-xxb"/>
                                                         <constraint firstItem="ruA-Op-fTz" firstAttribute="leading" secondItem="L4G-JB-Y6c" secondAttribute="leading" id="k3b-nM-mVr"/>
@@ -62,9 +62,9 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="L4G-JB-Y6c" secondAttribute="bottom" constant="6" id="5K8-yA-dB1"/>
-                                                <constraint firstAttribute="trailing" secondItem="L4G-JB-Y6c" secondAttribute="trailing" constant="16" id="Rgb-Sz-f6q"/>
+                                                <constraint firstAttribute="trailing" secondItem="L4G-JB-Y6c" secondAttribute="trailing" constant="15" id="Rgb-Sz-f6q"/>
                                                 <constraint firstItem="L4G-JB-Y6c" firstAttribute="top" secondItem="sK8-T3-QL2" secondAttribute="top" constant="6" id="hq6-Ul-4He"/>
-                                                <constraint firstItem="L4G-JB-Y6c" firstAttribute="leading" secondItem="sK8-T3-QL2" secondAttribute="leading" constant="16" id="s0k-BB-BXC"/>
+                                                <constraint firstItem="L4G-JB-Y6c" firstAttribute="leading" secondItem="sK8-T3-QL2" secondAttribute="leading" constant="15" id="s0k-BB-BXC"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -75,14 +75,14 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="TableViewCellTest1VCFilteringTableViewCell2" id="4Uv-7s-3s8" customClass="TableViewCellTest1VCFilteringTableViewCell2" customModule="ArchitectureIOs" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="123.5" width="414" height="160"/>
+                                        <rect key="frame" x="0.0" y="123.5" width="414" height="140"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4Uv-7s-3s8" id="Vyh-yL-5hx">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="160"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="140"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ugT-tb-kMx">
-                                                    <rect key="frame" x="16" y="16" width="382" height="128"/>
+                                                    <rect key="frame" x="16" y="6" width="382" height="128"/>
                                                     <subviews>
                                                         <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IAp-4i-dSY">
                                                             <rect key="frame" x="0.0" y="0.0" width="382" height="128"/>
@@ -101,10 +101,10 @@
                                                 </stackView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="ugT-tb-kMx" secondAttribute="bottom" constant="16" id="33L-my-4Dg"/>
+                                                <constraint firstAttribute="bottom" secondItem="ugT-tb-kMx" secondAttribute="bottom" constant="6" id="33L-my-4Dg"/>
                                                 <constraint firstItem="ugT-tb-kMx" firstAttribute="leading" secondItem="Vyh-yL-5hx" secondAttribute="leading" constant="16" id="5kU-w3-J6Q"/>
                                                 <constraint firstAttribute="trailing" secondItem="ugT-tb-kMx" secondAttribute="trailing" constant="16" id="ned-fG-hES"/>
-                                                <constraint firstItem="ugT-tb-kMx" firstAttribute="top" secondItem="Vyh-yL-5hx" secondAttribute="top" constant="16" id="zgB-fG-IHr"/>
+                                                <constraint firstItem="ugT-tb-kMx" firstAttribute="top" secondItem="Vyh-yL-5hx" secondAttribute="top" constant="6" id="zgB-fG-IHr"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -29,10 +29,10 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8RV-5j-MeS">
-                                                    <rect key="frame" x="16" y="6" width="382" height="62"/>
+                                                    <rect key="frame" x="15" y="6" width="384" height="62"/>
                                                     <subviews>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XVA-wM-Xc7">
-                                                            <rect key="frame" x="0.0" y="0.0" width="382" height="62"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="384" height="62"/>
                                                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                             <connections>
                                                                 <action selector="touchDown:" destination="Ibe-w4-XJI" eventType="touchDown" id="Fph-Y6-6ua"/>
@@ -40,7 +40,7 @@
                                                             </connections>
                                                         </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ナビゲーション遷移テスト" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Vb-sX-42j">
-                                                            <rect key="frame" x="16" y="16" width="350" height="30"/>
+                                                            <rect key="frame" x="15" y="15" width="354" height="32"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -49,13 +49,13 @@
                                                     <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                                                     <constraints>
                                                         <constraint firstAttribute="bottom" secondItem="XVA-wM-Xc7" secondAttribute="bottom" id="0cB-N9-lud"/>
-                                                        <constraint firstAttribute="trailing" secondItem="1Vb-sX-42j" secondAttribute="trailing" constant="16" id="1HU-xh-C3e"/>
+                                                        <constraint firstAttribute="trailing" secondItem="1Vb-sX-42j" secondAttribute="trailing" constant="15" id="1HU-xh-C3e"/>
                                                         <constraint firstAttribute="height" constant="62" id="Ll2-7a-Usz"/>
                                                         <constraint firstItem="XVA-wM-Xc7" firstAttribute="top" secondItem="8RV-5j-MeS" secondAttribute="top" id="cNI-jm-ScJ"/>
-                                                        <constraint firstItem="1Vb-sX-42j" firstAttribute="leading" secondItem="8RV-5j-MeS" secondAttribute="leading" constant="16" id="e7G-rm-fak"/>
+                                                        <constraint firstItem="1Vb-sX-42j" firstAttribute="leading" secondItem="8RV-5j-MeS" secondAttribute="leading" constant="15" id="e7G-rm-fak"/>
                                                         <constraint firstAttribute="trailing" secondItem="XVA-wM-Xc7" secondAttribute="trailing" id="jVv-eP-MhD"/>
-                                                        <constraint firstItem="1Vb-sX-42j" firstAttribute="top" secondItem="8RV-5j-MeS" secondAttribute="top" constant="16" id="nPt-OE-Exi"/>
-                                                        <constraint firstAttribute="bottom" secondItem="1Vb-sX-42j" secondAttribute="bottom" constant="16" id="xSY-PT-AtT"/>
+                                                        <constraint firstItem="1Vb-sX-42j" firstAttribute="top" secondItem="8RV-5j-MeS" secondAttribute="top" constant="15" id="nPt-OE-Exi"/>
+                                                        <constraint firstAttribute="bottom" secondItem="1Vb-sX-42j" secondAttribute="bottom" constant="15" id="xSY-PT-AtT"/>
                                                         <constraint firstItem="XVA-wM-Xc7" firstAttribute="leading" secondItem="8RV-5j-MeS" secondAttribute="leading" id="zee-3i-4Uy"/>
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>
@@ -66,10 +66,10 @@
                                                 </view>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="8RV-5j-MeS" secondAttribute="trailing" constant="16" id="C1y-vc-Gpi"/>
+                                                <constraint firstAttribute="trailing" secondItem="8RV-5j-MeS" secondAttribute="trailing" constant="15" id="C1y-vc-Gpi"/>
                                                 <constraint firstAttribute="bottom" secondItem="8RV-5j-MeS" secondAttribute="bottom" constant="6" id="cku-nP-7aB"/>
                                                 <constraint firstItem="8RV-5j-MeS" firstAttribute="top" secondItem="ods-mO-DdP" secondAttribute="top" constant="6" id="gn6-YU-Kt7"/>
-                                                <constraint firstItem="8RV-5j-MeS" firstAttribute="leading" secondItem="ods-mO-DdP" secondAttribute="leading" constant="16" id="mtj-g4-rbc"/>
+                                                <constraint firstItem="8RV-5j-MeS" firstAttribute="leading" secondItem="ods-mO-DdP" secondAttribute="leading" constant="15" id="mtj-g4-rbc"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -29,10 +29,10 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bcu-7Z-Ojy">
-                                                    <rect key="frame" x="16" y="6" width="382" height="62"/>
+                                                    <rect key="frame" x="15" y="6" width="384" height="62"/>
                                                     <subviews>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IMi-JX-5vA">
-                                                            <rect key="frame" x="0.0" y="0.0" width="382" height="62"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="384" height="62"/>
                                                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                             <connections>
                                                                 <action selector="touchDown:" destination="1gY-b4-2SU" eventType="touchDown" id="exc-sU-GU8"/>
@@ -40,7 +40,7 @@
                                                             </connections>
                                                         </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ナビゲーション遷移テスト" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JiN-Kc-Zad">
-                                                            <rect key="frame" x="16" y="16" width="350" height="30"/>
+                                                            <rect key="frame" x="15" y="15" width="354" height="32"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -48,15 +48,15 @@
                                                     </subviews>
                                                     <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                                                     <constraints>
-                                                        <constraint firstItem="JiN-Kc-Zad" firstAttribute="top" secondItem="bcu-7Z-Ojy" secondAttribute="top" constant="16" id="A2C-EX-VFE"/>
+                                                        <constraint firstItem="JiN-Kc-Zad" firstAttribute="top" secondItem="bcu-7Z-Ojy" secondAttribute="top" constant="15" id="A2C-EX-VFE"/>
                                                         <constraint firstAttribute="height" constant="62" id="GNz-uX-crT"/>
                                                         <constraint firstItem="IMi-JX-5vA" firstAttribute="leading" secondItem="bcu-7Z-Ojy" secondAttribute="leading" id="OWh-zt-rPO"/>
                                                         <constraint firstAttribute="trailing" secondItem="IMi-JX-5vA" secondAttribute="trailing" id="cQf-GU-Ef1"/>
                                                         <constraint firstAttribute="bottom" secondItem="IMi-JX-5vA" secondAttribute="bottom" id="d4c-aa-ojU"/>
-                                                        <constraint firstItem="JiN-Kc-Zad" firstAttribute="leading" secondItem="bcu-7Z-Ojy" secondAttribute="leading" constant="16" id="lPW-rT-aFM"/>
-                                                        <constraint firstAttribute="bottom" secondItem="JiN-Kc-Zad" secondAttribute="bottom" constant="16" id="vaP-bE-A0F"/>
+                                                        <constraint firstItem="JiN-Kc-Zad" firstAttribute="leading" secondItem="bcu-7Z-Ojy" secondAttribute="leading" constant="15" id="lPW-rT-aFM"/>
+                                                        <constraint firstAttribute="bottom" secondItem="JiN-Kc-Zad" secondAttribute="bottom" constant="15" id="vaP-bE-A0F"/>
                                                         <constraint firstItem="IMi-JX-5vA" firstAttribute="top" secondItem="bcu-7Z-Ojy" secondAttribute="top" id="wKK-ci-iBa"/>
-                                                        <constraint firstAttribute="trailing" secondItem="JiN-Kc-Zad" secondAttribute="trailing" constant="16" id="yxm-uB-LOn"/>
+                                                        <constraint firstAttribute="trailing" secondItem="JiN-Kc-Zad" secondAttribute="trailing" constant="15" id="yxm-uB-LOn"/>
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -66,9 +66,9 @@
                                                 </view>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="bcu-7Z-Ojy" firstAttribute="leading" secondItem="050-dD-dDW" secondAttribute="leading" constant="16" id="PkR-zx-Gmc"/>
+                                                <constraint firstItem="bcu-7Z-Ojy" firstAttribute="leading" secondItem="050-dD-dDW" secondAttribute="leading" constant="15" id="PkR-zx-Gmc"/>
                                                 <constraint firstItem="bcu-7Z-Ojy" firstAttribute="top" secondItem="050-dD-dDW" secondAttribute="top" constant="6" id="SUN-Qz-Fuv"/>
-                                                <constraint firstAttribute="trailing" secondItem="bcu-7Z-Ojy" secondAttribute="trailing" constant="16" id="UMj-BS-DVY"/>
+                                                <constraint firstAttribute="trailing" secondItem="bcu-7Z-Ojy" secondAttribute="trailing" constant="15" id="UMj-BS-DVY"/>
                                                 <constraint firstAttribute="bottom" secondItem="bcu-7Z-Ojy" secondAttribute="bottom" constant="6" id="jnn-dh-LSU"/>
                                             </constraints>
                                         </tableViewCellContentView>
