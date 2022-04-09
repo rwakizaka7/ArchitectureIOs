@@ -54,19 +54,38 @@ class TableViewCellTest1VCFilteringTableViewCell1:
 class TableViewCellTest1VCFilteringTableViewCell2:
     TableViewCell<TableViewCellTest1ViewController> {
     @IBOutlet weak var stackView: UIStackView!
-    @IBOutlet weak var _titleView: UIView!
-    var titleView: UIView!
+    
+    @IBOutlet weak var _space1View: UIView!
+    @IBOutlet weak var _titleLabelView: UIView!
+    @IBOutlet weak var _space2View: UIView!
+    @IBOutlet weak var _titleTextFieldView: UIView!
+    @IBOutlet weak var _space3View: UIView!
+    @IBOutlet weak var _buttonView: UIView!
+    @IBOutlet weak var _space4View: UIView!
+    
+    var space1View: UIView!
+    var titleLabelView: UIView!
+    var space2View: UIView!
+    var titleTextFieldView: UIView!
+    var space3View: UIView!
+    var buttonView: UIView!
+    var space4View: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        if titleView == nil {
-            titleView = _titleView
-        }
+        space1View = _space1View
+        titleLabelView = _titleLabelView
+        space2View = _space2View
+        titleTextFieldView = _titleTextFieldView
+        space3View = _space3View
+        buttonView = _buttonView
+        space4View = _space4View
     }
 }
 
-class TableViewCellTest1ViewController: LinkViewController<TableViewCellTest1VCModel> {
+class TableViewCellTest1ViewController: LinkViewController<TableViewCellTest1VCModel>,
+                                        PVScrollPositonAdjustable {
     typealias S = TableViewCellTest1VCMenuTableSection
     
     @IBOutlet weak var filteringTableView: UITableView!
@@ -92,9 +111,50 @@ class TableViewCellTest1ViewController: LinkViewController<TableViewCellTest1VCM
     var sections: [S] = []
     var selectionIndexPath: IndexPath!
     
-    override var textFields: [UITextField] {
-        return [searchTextField]
+    var adjustmentScrollView: UIScrollView {
+        get {
+            return filteringTableView
+        }
     }
+    
+    var positionAdjustmentState: PVScrollPositionAdjustmentEntity {
+        get {
+            return PVScrollPositionAdjustmentEntity(
+                scrollFocusTargets: scrollFocusTargets,
+                initialContentOffsetY: initialContentOffsetY,
+                previousContentHeight: previousContentHeight)
+        }
+        set(p) {
+            initialContentOffsetY = p.initialContentOffsetY
+            previousContentHeight = p.previousContentHeight
+        }
+    }
+    
+    var scrollFocusTargets: [PVScrollFocusTargetEntity] {
+        return filteringTableView.visibleCells.compactMap {
+            cell -> PVScrollFocusTargetEntity? in
+            
+            if let cell = cell as? TableViewCellTest1VCFilteringTableViewCell2 {
+                let textField = getTextField(cell: cell, tableView: filteringTableView, indexPath: cell.indexPath)
+                return PVScrollFocusTargetEntity(
+                    focusView: textField, cellFrameMaxY: cell.frame.maxY, adjustment: 0)
+            }
+            
+            return nil
+        }
+    }
+    var initialContentOffsetY: CGFloat!
+    var previousContentHeight: CGFloat!
+    
+    override var textFields: [UITextField] {
+        var textFields = [searchTextField]
+        textFields.append(contentsOf:filteringTableViewCellTextFields.keys.sorted().map ({
+            return filteringTableViewCellTextFields[$0]!
+        }))
+        return textFields
+    }
+    
+    var filteringTableViewCellTextFields: [IndexPath:UITextField] = [:]
     
     override var testFieldShouldChangeCharacters: [UITextField: (String, Bool) -> Bool] {
         return [searchTextField: {
@@ -114,7 +174,7 @@ class TableViewCellTest1ViewController: LinkViewController<TableViewCellTest1VCM
     }
     
     override var textFieldFocusChangeList: [UITextField] {
-        return [searchTextField]
+        return textFields
     }
     
     override func receiveAction(_ action: ActionFromModel, params: [String : Any]) {
@@ -195,6 +255,31 @@ class TableViewCellTest1ViewController: LinkViewController<TableViewCellTest1VCM
         return view
     }
     
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        super.tableView(tableView, willDisplay: cell, forRowAt: indexPath)
+
+        let cellInfo = sections[indexPath.section].cells[indexPath.row]
+        if cellInfo.status == .editing {
+            if let cell = cell as? TableViewCellTest1VCFilteringTableViewCell2 {
+                let textField = getTextField(cell: cell, tableView: tableView, indexPath: indexPath)
+                filteringTableViewCellTextFields[indexPath] = textField
+            }
+        }
+    }
+
+    override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        super.tableView(tableView, didEndDisplaying: cell, forRowAt: indexPath)
+        
+        if let cell = cell as? TableViewCellTest1VCFilteringTableViewCell2 {
+            let textField = getTextField(cell: cell, tableView: tableView, indexPath: indexPath)
+            
+            // 抽出時に削除できるようにインスタンスで索引して削除する。
+            filteringTableViewCellTextFields = filteringTableViewCellTextFields.filter({
+                $0.value != textField
+            })
+        }
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return sections[section].cells.count
     }
@@ -223,13 +308,72 @@ class TableViewCellTest1ViewController: LinkViewController<TableViewCellTest1VCM
             cell.stackView.subviews.forEach {
                 $0.removeFromSuperview()
             }
-            
-            cell.stackView.addArrangedSubview(
-                Utils.copy(cell.titleView))
-            cell.stackView.addArrangedSubview(
-                Utils.copy(cell.titleView))
+
+            cell.stackView.addArrangedSubview({
+                let view = Utils.copy(cell.space1View)!
+                view.tag = 1
+                return view
+            }())
+            cell.stackView.addArrangedSubview({
+                let titleLabelView = Utils.copy(cell.titleLabelView)!
+                titleLabelView.tag = 2
+                let titleLabel = titleLabelView.subviews.filter ({
+                    $0.tag == 1
+                }).first! as! UILabel
+                titleLabel.text = cellInfo.title
+                return titleLabelView
+            }())
+            cell.stackView.addArrangedSubview({
+                let view = Utils.copy(cell.space2View)!
+                view.tag = 3
+                return view
+            }())
+            cell.stackView.addArrangedSubview({
+                [weak self] in
+                let titleTextFieldView = Utils.copy(cell.titleTextFieldView)!
+                
+                guard let self = self else {
+                    return titleTextFieldView
+                }
+                
+                titleTextFieldView.tag = 4
+                let titleTextField = titleTextFieldView.subviews.filter ({
+                    $0.tag == 1
+                }).first! as! UITextField
+                titleTextField.text = cellInfo.editingTitle
+                titleTextField.delegate = self
+                return titleTextFieldView
+            }())
+            cell.stackView.addArrangedSubview({
+                let view = Utils.copy(cell.space3View)!
+                view.tag = 5
+                return view
+            }())
+            cell.stackView.addArrangedSubview({
+                let buttonView = Utils.copy(cell.buttonView)!
+                buttonView.tag = 6
+                let button = buttonView.subviews.filter ({
+                    $0.tag == 1
+                }).first! as! UIButton
+                button.titleLabel!.font = UIFont.systemFont(ofSize: 13)
+                return buttonView
+            }())
+            cell.stackView.addArrangedSubview({
+                let view = Utils.copy(cell.space4View)!
+                view.tag = 7
+                return view
+            }())
             
             return cell
         }
+    }
+    
+    func getTextField(cell: TableViewCellTest1VCFilteringTableViewCell2,
+                      tableView: UITableView, indexPath: IndexPath) -> UITextField {
+        return cell.stackView.subviews.filter({
+            $0.tag == 4
+        }).first!.subviews.filter({
+            $0.tag == 1
+        }).first! as! UITextField
     }
 }

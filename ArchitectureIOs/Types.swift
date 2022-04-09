@@ -85,6 +85,8 @@ enum TableViewCellTest1VCMenuVCCellStatus {
 }
 
 struct TableViewCellTest1VCMenuTableCell {
+    var id: Int
     var status: TableViewCellTest1VCMenuVCCellStatus
     var title: String
+    var editingTitle: String!
 }

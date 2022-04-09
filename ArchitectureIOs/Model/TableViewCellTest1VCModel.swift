@@ -12,29 +12,29 @@ class TableViewCellTest1VCModel: LinkModel {
     typealias C = TableViewCellTest1VCMenuTableCell
     
     var sections: [S] = [S(title: "Mac OS X", cells:
-                            [C(status: .normal, title: "Mac OS X Public Beta (Siam)"),
-                             C(status: .normal, title: "Mac OS X 10.0 (Cheetah)"),
-                             C(status: .normal, title: "Mac OS X 10.1 (Puma)"),
-                             C(status: .normal, title: "Mac OS X 10.2 (Jaguar)"),
-                             C(status: .normal, title: "Mac OS X 10.3 (Panther)"),
-                             C(status: .normal, title: "Mac OS X 10.4 (Tiger)"),
-                             C(status: .normal, title: "Mac OS X 10.5 (Leopard)"),
-                             C(status: .normal, title: "Mac OS X 10.6 (Snow Leopard)"),
-                             C(status: .normal, title: "Mac OS X 10.7 (Lion)")
+                            [C(id: 1, status: .normal, title: "Mac OS X Public Beta (Siam)"),
+                             C(id: 2, status: .normal, title: "Mac OS X 10.0 (Cheetah)"),
+                             C(id: 3, status: .normal, title: "Mac OS X 10.1 (Puma)"),
+                             C(id: 4, status: .normal, title: "Mac OS X 10.2 (Jaguar)"),
+                             C(id: 5, status: .normal, title: "Mac OS X 10.3 (Panther)"),
+                             C(id: 6, status: .normal, title: "Mac OS X 10.4 (Tiger)"),
+                             C(id: 7, status: .normal, title: "Mac OS X 10.5 (Leopard)"),
+                             C(id: 8, status: .normal, title: "Mac OS X 10.6 (Snow Leopard)"),
+                             C(id: 9, status: .normal, title: "Mac OS X 10.7 (Lion)")
                             ]),
                          S(title: "OS X 10", cells:
-                            [C(status: .normal, title: "OS X 10.8 Mountain Lion"),
-                             C(status: .normal, title: "OS X 10.9 Mavericks"),
-                             C(status: .normal, title: "OS X 10.10 Yosemite"),
-                             C(status: .normal, title: "OS X 10.11 El Capitan")
+                            [C(id: 10, status: .normal, title: "OS X 10.8 Mountain Lion"),
+                             C(id: 11, status: .normal, title: "OS X 10.9 Mavericks"),
+                             C(id: 12, status: .normal, title: "OS X 10.10 Yosemite"),
+                             C(id: 13, status: .normal, title: "OS X 10.11 El Capitan")
                              ]),
                          S(title: "macOS", cells:
-                            [C(status: .normal, title: "macOS Sierra 10.12"),
-                             C(status: .normal, title: "macOS High Sierra 10.13"),
-                             C(status: .normal, title: "macOS Mojave 10.14"),
-                             C(status: .normal, title: "macOS Catalina 10.15"),
-                             C(status: .normal, title: "macOS Big Sur 11"),
-                             C(status: .normal, title: "macOS Monterey 12")
+                            [C(id: 14, status: .normal, title: "macOS Sierra 10.12"),
+                             C(id: 15, status: .normal, title: "macOS High Sierra 10.13"),
+                             C(id: 16, status: .normal, title: "macOS Mojave 10.14"),
+                             C(id: 17, status: .normal, title: "macOS Catalina 10.15"),
+                             C(id: 18, status: .normal, title: "macOS Big Sur 11"),
+                             C(id: 19, status: .normal, title: "macOS Monterey 12")
                              ])
                             ]
     
@@ -84,7 +84,29 @@ class TableViewCellTest1VCModel: LinkModel {
                 return
             }
             
-            sections[indexPath.section].cells[indexPath.row].status = .editing
+            // 検索後のIndexPathを検索前のIndexPathに変換する必要がある。
+            let id = displayingSections[indexPath.section].cells[indexPath.row].id
+            let indexPaths: [Int:IndexPath] = sections.enumerated().compactMap({
+                section -> (sectionId: Int, cells: [C])? in
+                guard section.element.cells.count > 0 else {
+                    return nil
+                }
+                return (section.offset, section.element.cells)
+            }).reduce(into: [(sectionId: Int, rowId: Int, id: Int)](), {
+                rows, section in
+                rows.append(contentsOf: section.cells.enumerated().map({
+                    cell -> (sectionId: Int, rowId: Int, id: Int) in
+                    return (section.sectionId, cell.offset, cell.element.id)
+                }))
+            }).reduce(into: [Int:IndexPath](), {
+                indexPaths, row in
+                indexPaths[row.id] = IndexPath(row: row.rowId, section: row.sectionId)
+            })
+            let editingIndexPath: IndexPath = indexPaths[id]!
+            
+            sections[editingIndexPath.section].cells[editingIndexPath.row].status = .editing
+            sections[editingIndexPath.section].cells[editingIndexPath.row].editingTitle
+                = sections[editingIndexPath.section].cells[editingIndexPath.row].title
             displayingSections = extractSection(sections: sections, word: searchText)
             sendAction(.dataSetting, params: ["sections":displayingSections])
             sendAction(.reloadRows, params: ["index_paths":[indexPath],

@@ -21,7 +21,7 @@ struct PVScrollFocusTargetEntity {
 }
 
 protocol PVScrollPositonAdjustable: BaseViewController {
-    var adjustmentScrollView: UIScrollView! { get }
+    var adjustmentScrollView: UIScrollView { get }
     var positionAdjustmentState: PVScrollPositionAdjustmentEntity { get set }
 }
 

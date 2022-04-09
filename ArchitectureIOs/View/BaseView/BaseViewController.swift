@@ -325,6 +325,9 @@ extension BaseViewController: UITableViewDelegate {
         sendAction(.tableViewSelection, scrollView: tableView, indexPath: indexPath)
     }
     
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+    }
+    
     func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         sendAction(.tableViewReleasing, scrollView: tableView, indexPath: indexPath)
     }
