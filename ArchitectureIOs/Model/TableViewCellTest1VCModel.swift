@@ -62,6 +62,30 @@ class TableViewCellTest1VCModel: LinkModel {
                 displayingSections = extractSection(sections: sections, word: searchText)
                 sendAction(.dataSetting, params: ["sections":displayingSections])
                 sendAction(.reloadData, params: ["filtering_table_view":""])
+            case "filtering_table_view_cell_return_button":
+                guard let indexPath = params["index_path"] as? IndexPath else {
+                    return
+                }
+                
+                let _indexPath = getIndexPathBeforeExtraction(indexPath)
+                sections[_indexPath.section].cells[_indexPath.row].status = .normal
+                displayingSections = extractSection(sections: sections, word: searchText)
+                sendAction(.dataSetting, params: ["sections":displayingSections])
+                sendAction(.reloadRows, params: ["index_paths":[indexPath],
+                                                 "row_animation":RowAnimation.fade])
+            case "filtering_table_view_cell_close_button":
+                guard let indexPath = params["index_path"] as? IndexPath else {
+                    return
+                }
+                
+                let _indexPath = getIndexPathBeforeExtraction(indexPath)
+                sections[_indexPath.section].cells[_indexPath.row].status = .normal
+                sections[_indexPath.section].cells[_indexPath.row].title
+                    = sections[_indexPath.section].cells[_indexPath.row].editingTitle
+                displayingSections = extractSection(sections: sections, word: searchText)
+                sendAction(.dataSetting, params: ["sections":displayingSections])
+                sendAction(.reloadRows, params: ["index_paths":[indexPath],
+                                                 "row_animation":RowAnimation.fade])
             default:
                 break
             }
@@ -76,6 +100,15 @@ class TableViewCellTest1VCModel: LinkModel {
                 displayingSections = extractSection(sections: sections, word: searchText)
                 sendAction(.dataSetting, params: ["sections":displayingSections])
                 sendAction(.reloadData, params: ["filtering_table_view":""])
+            case "filtering_table_view_cell_title_text_field":
+                guard let indexPath = params["index_path"] as? IndexPath else {
+                    return
+                }
+                let _indexPath = getIndexPathBeforeExtraction(indexPath)
+                sections[_indexPath.section].cells[_indexPath.row].editingTitle
+                    = text
+                displayingSections = extractSection(sections: sections, word: searchText)
+                sendAction(.dataSetting, params: ["sections":displayingSections])
             default:
                 break
             }
@@ -84,29 +117,10 @@ class TableViewCellTest1VCModel: LinkModel {
                 return
             }
             
-            // 検索後のIndexPathを検索前のIndexPathに変換する必要がある。
-            let id = displayingSections[indexPath.section].cells[indexPath.row].id
-            let indexPaths: [Int:IndexPath] = sections.enumerated().compactMap({
-                section -> (sectionId: Int, cells: [C])? in
-                guard section.element.cells.count > 0 else {
-                    return nil
-                }
-                return (section.offset, section.element.cells)
-            }).reduce(into: [(sectionId: Int, rowId: Int, id: Int)](), {
-                rows, section in
-                rows.append(contentsOf: section.cells.enumerated().map({
-                    cell -> (sectionId: Int, rowId: Int, id: Int) in
-                    return (section.sectionId, cell.offset, cell.element.id)
-                }))
-            }).reduce(into: [Int:IndexPath](), {
-                indexPaths, row in
-                indexPaths[row.id] = IndexPath(row: row.rowId, section: row.sectionId)
-            })
-            let editingIndexPath: IndexPath = indexPaths[id]!
-            
-            sections[editingIndexPath.section].cells[editingIndexPath.row].status = .editing
-            sections[editingIndexPath.section].cells[editingIndexPath.row].editingTitle
-                = sections[editingIndexPath.section].cells[editingIndexPath.row].title
+            let _indexPath = getIndexPathBeforeExtraction(indexPath)
+            sections[_indexPath.section].cells[_indexPath.row].status = .editing
+            sections[_indexPath.section].cells[_indexPath.row].editingTitle
+                = sections[_indexPath.section].cells[_indexPath.row].title
             displayingSections = extractSection(sections: sections, word: searchText)
             sendAction(.dataSetting, params: ["sections":displayingSections])
             sendAction(.reloadRows, params: ["index_paths":[indexPath],
@@ -114,6 +128,28 @@ class TableViewCellTest1VCModel: LinkModel {
         default:
             break
         }
+    }
+    
+    /// 抽出後のIndexPathを抽出前のIndexPathに変換する
+    func getIndexPathBeforeExtraction(_ indexPath: IndexPath) -> IndexPath {
+        let id = displayingSections[indexPath.section].cells[indexPath.row].id
+        let indexPaths: [Int:IndexPath] = sections.enumerated().compactMap({
+            section -> (sectionId: Int, cells: [C])? in
+            guard section.element.cells.count > 0 else {
+                return nil
+            }
+            return (section.offset, section.element.cells)
+        }).reduce(into: [(sectionId: Int, rowId: Int, id: Int)](), {
+            rows, section in
+            rows.append(contentsOf: section.cells.enumerated().map({
+                cell -> (sectionId: Int, rowId: Int, id: Int) in
+                return (section.sectionId, cell.offset, cell.element.id)
+            }))
+        }).reduce(into: [Int:IndexPath](), {
+            indexPaths, row in
+            indexPaths[row.id] = IndexPath(row: row.rowId, section: row.sectionId)
+        })
+        return indexPaths[id]!
     }
     
     func extractSection(sections: [S], word: String) -> [S] {

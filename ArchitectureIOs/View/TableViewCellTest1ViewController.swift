@@ -71,6 +71,9 @@ class TableViewCellTest1VCFilteringTableViewCell2:
     var buttonView: UIView!
     var space4View: UIView!
     
+    var returnButton: UIButton!
+    var closeButton: UIButton!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -81,6 +84,25 @@ class TableViewCellTest1VCFilteringTableViewCell2:
         space3View = _space3View
         buttonView = _buttonView
         space4View = _space4View
+    }
+    
+    @IBAction func touchUpInside(_ sender: Any) {
+        guard let button = sender as? UIButton else {
+            return
+        }
+        
+        switch button {
+        case returnButton:
+            vc.sendAction(.touchUpInside, params: [
+                "button_id":"filtering_table_view_cell_return_button",
+                "index_path":indexPath])
+        case closeButton:
+            vc.sendAction(.touchUpInside, params: [
+                "button_id":"filtering_table_view_cell_close_button",
+                "index_path":indexPath])
+        default:
+            break
+        }
     }
 }
 
@@ -157,7 +179,7 @@ class TableViewCellTest1ViewController: LinkViewController<TableViewCellTest1VCM
     var filteringTableViewCellTextFields: [IndexPath:UITextField] = [:]
     
     override var testFieldShouldChangeCharacters: [UITextField: (String, Bool) -> Bool] {
-        return [searchTextField: {
+        var textFields: [UITextField: (String, Bool) -> Bool] = [searchTextField: {
             [weak self] (text, clearing) -> Bool in
             guard let self = self else {
                 return false
@@ -171,7 +193,19 @@ class TableViewCellTest1ViewController: LinkViewController<TableViewCellTest1VCM
             self.sendAction(.textFieldEditing, params: ["text_id":"search_text_field", "text":text])
             return true
         }]
+        
+        let shouldChangeCharacters = filteringTableViewCellTextFieldShouldChangeCharacters.values
+        
+        shouldChangeCharacters.forEach {
+            e in
+            textFields[e.textField] = e.scc
+        }
+
+        return textFields
     }
+    
+    var filteringTableViewCellTextFieldShouldChangeCharacters:
+        [IndexPath:(textField: UITextField, scc: (String, Bool) -> Bool)] = [:]
     
     override var textFieldFocusChangeList: [UITextField] {
         return textFields
@@ -263,6 +297,17 @@ class TableViewCellTest1ViewController: LinkViewController<TableViewCellTest1VCM
             if let cell = cell as? TableViewCellTest1VCFilteringTableViewCell2 {
                 let textField = getTextField(cell: cell, tableView: tableView, indexPath: indexPath)
                 filteringTableViewCellTextFields[indexPath] = textField
+                filteringTableViewCellTextFieldShouldChangeCharacters[indexPath] = (
+                    textField: textField, scc: {
+                        [weak self] (text, _) -> Bool in
+                        guard let self = self else {
+                            return false
+                        }
+                        self.sendAction(.textFieldEditing, params: [
+                            "text_id":"filtering_table_view_cell_title_text_field",
+                            "index_path":indexPath, "text":text])
+                        return true
+                })
             }
         }
     }
@@ -277,6 +322,10 @@ class TableViewCellTest1ViewController: LinkViewController<TableViewCellTest1VCM
             filteringTableViewCellTextFields = filteringTableViewCellTextFields.filter({
                 $0.value != textField
             })
+            filteringTableViewCellTextFieldShouldChangeCharacters
+                = filteringTableViewCellTextFieldShouldChangeCharacters.filter({
+                    $0.value.textField != textField
+                })
         }
     }
     
@@ -352,10 +401,23 @@ class TableViewCellTest1ViewController: LinkViewController<TableViewCellTest1VCM
             cell.stackView.addArrangedSubview({
                 let buttonView = Utils.copy(cell.buttonView)!
                 buttonView.tag = 6
-                let button = buttonView.subviews.filter ({
+                let stackView = buttonView.subviews.filter ({
                     $0.tag == 1
-                }).first! as! UIButton
-                button.titleLabel!.font = UIFont.systemFont(ofSize: 13)
+                }).first! as! UIStackView
+                if let button = stackView.subviews.filter ({
+                    $0.tag == 1
+                }).first as? UIButton {
+                    cell.returnButton = button
+                    button.addTarget(cell, action: #selector(cell.touchUpInside(_:)), for: .touchUpInside)
+                    button.titleLabel!.font = UIFont.systemFont(ofSize: 13)
+                }
+                if let button = stackView.subviews.filter ({
+                    $0.tag == 2
+                }).first as? UIButton {
+                    cell.closeButton = button
+                    button.addTarget(cell, action: #selector(cell.touchUpInside(_:)), for: .touchUpInside)
+                    button.titleLabel!.font = UIFont.systemFont(ofSize: 13)
+                }
                 return buttonView
             }())
             cell.stackView.addArrangedSubview({
