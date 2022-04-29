@@ -45,21 +45,21 @@ extension PVScrollPositonAdjustable {
         positionAdjustmentState.previousContentHeight = adjustmentScrollView.contentSize.height
         
         let offsetY = adjustmentScrollView.contentOffset.y + adjustment
-        // コンテンツ領域のスクロール下の場所で、reloadRowsを使用すると、
-        // visibleCellsの更新が遅れる。
-        adjustmentScrollView.contentInset.bottom = keyboardFrame.height
+// 下記を行うとテキストフィールドすぐ下のスクロールがうまくいかなくなる。
+//        // コンテンツ領域のスクロール下の場所で、reloadRowsを使用すると、
+//        // visibleCellsの更新が遅れる。
+//        adjustmentScrollView.contentInset.bottom = keyboardFrame.height
         adjustmentScrollView.contentOffset = CGPoint(x: 0, y: offsetY)
     }
     
     func scrollBykeyboardWillHide() {
-        guard let offsetY = positionAdjustmentState.initialContentOffsetY,
-              positionAdjustmentState.previousContentHeight
-                == adjustmentScrollView.contentSize.height else {
+        guard let offsetY = positionAdjustmentState.initialContentOffsetY else {
             return
         }
-        // コンテンツ領域のスクロール下の場所で、reloadRowsを使用すると、
-        // visibleCellsの更新が遅れる。
-        adjustmentScrollView.contentInset.bottom = 0
+// 下記を行うとテキストフィールドすぐ下のスクロールがうまくいかなくなる。
+//        // コンテンツ領域のスクロール下の場所で、reloadRowsを使用すると、
+//        // visibleCellsの更新が遅れる。
+//        adjustmentScrollView.contentInset.bottom = 0
         adjustmentScrollView.contentOffset = CGPoint(x: 0, y: offsetY)
         
         positionAdjustmentState.initialContentOffsetY = nil

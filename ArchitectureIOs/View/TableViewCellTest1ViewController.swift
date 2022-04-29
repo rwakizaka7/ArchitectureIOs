@@ -60,16 +60,20 @@ class TableViewCellTest1VCFilteringTableViewCell2:
     @IBOutlet weak var _space2View: UIView!
     @IBOutlet weak var _titleTextFieldView: UIView!
     @IBOutlet weak var _space3View: UIView!
-    @IBOutlet weak var _buttonView: UIView!
+    @IBOutlet weak var _titleTextViewContainedView: UIView!
     @IBOutlet weak var _space4View: UIView!
+    @IBOutlet weak var _buttonView: UIView!
+    @IBOutlet weak var _space5View: UIView!
     
     var space1View: UIView!
     var titleLabelView: UIView!
     var space2View: UIView!
     var titleTextFieldView: UIView!
     var space3View: UIView!
-    var buttonView: UIView!
+    var titleTextViewContainedView: UIView!
     var space4View: UIView!
+    var buttonView: UIView!
+    var space5View: UIView!
     
     var returnButton: UIButton!
     var closeButton: UIButton!
@@ -82,8 +86,10 @@ class TableViewCellTest1VCFilteringTableViewCell2:
         space2View = _space2View
         titleTextFieldView = _titleTextFieldView
         space3View = _space3View
-        buttonView = _buttonView
+        titleTextViewContainedView = _titleTextViewContainedView
         space4View = _space4View
+        buttonView = _buttonView
+        space5View = _space5View
     }
     
     @IBAction func touchUpInside(_ sender: Any) {
@@ -158,8 +164,9 @@ class TableViewCellTest1ViewController: LinkViewController<TableViewCellTest1VCM
             
             if let cell = cell as? TableViewCellTest1VCFilteringTableViewCell2 {
                 let textField = getTextField(cell: cell, tableView: filteringTableView, indexPath: cell.indexPath)
+                let frame = textField.convert(textField.frame, to: filteringTableView)
                 return PVScrollFocusTargetEntity(
-                    focusView: textField, cellFrameMaxY: cell.frame.maxY, adjustment: 0)
+                    focusView: textField, cellFrameMaxY: /*cell.*/frame.maxY, adjustment: 0)
             }
             
             return nil
@@ -399,8 +406,29 @@ class TableViewCellTest1ViewController: LinkViewController<TableViewCellTest1VCM
                 return view
             }())
             cell.stackView.addArrangedSubview({
+                [weak self] in
+                let titleTextViewContainedView = Utils.copy(cell.titleTextViewContainedView)!
+                
+                guard let self = self else {
+                    return titleTextViewContainedView
+                }
+                
+                titleTextViewContainedView.tag = 6
+                let titleTextView = titleTextViewContainedView.subviews.filter ({
+                    $0.tag == 1
+                }).first! as! UITextView
+                titleTextView.text = cellInfo.editingTitle
+                //titleTextView.delegate = self
+                return titleTextViewContainedView
+            }())
+            cell.stackView.addArrangedSubview({
+                let view = Utils.copy(cell.space4View)!
+                view.tag = 7
+                return view
+            }())
+            cell.stackView.addArrangedSubview({
                 let buttonView = Utils.copy(cell.buttonView)!
-                buttonView.tag = 6
+                buttonView.tag = 8
                 let stackView = buttonView.subviews.filter ({
                     $0.tag == 1
                 }).first! as! UIStackView
@@ -421,8 +449,8 @@ class TableViewCellTest1ViewController: LinkViewController<TableViewCellTest1VCM
                 return buttonView
             }())
             cell.stackView.addArrangedSubview({
-                let view = Utils.copy(cell.space4View)!
-                view.tag = 7
+                let view = Utils.copy(cell.space5View)!
+                view.tag = 9
                 return view
             }())
             
